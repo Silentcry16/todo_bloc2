@@ -1,8 +1,13 @@
+import 'package:todo_bloc2/models/task.dart';
 import 'package:todo_bloc2/screens/task_screen.dart';
 import 'package:flutter/material.dart';
 
+import './bloc/bloc_exports.dart';
+
 void main() {
-  runApp(const MyApp());
+  BlocOverrides.runZoned(
+    () => runApp(const MyApp()),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -10,11 +15,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return BlocProvider(
+      create: (context) =>
+          TasksBloc()..add(AddTask(task: Task(title: 'task1'))),
+      child: MaterialApp(
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: TaskScreen(),
       ),
-      home: TaskScreen(),
     );
   }
 }
