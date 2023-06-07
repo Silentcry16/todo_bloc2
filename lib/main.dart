@@ -6,7 +6,7 @@ import './bloc/bloc_exports.dart';
 
 void main() {
   BlocOverrides.runZoned(
-    () => runApp(const MyApp()),
+    () => runApp(const MyApp()) ,
   );
 }
 
