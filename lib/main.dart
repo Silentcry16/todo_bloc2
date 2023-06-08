@@ -6,7 +6,7 @@ import './bloc/bloc_exports.dart';
 
 void main() {
   BlocOverrides.runZoned(
-    () => runApp(const MyApp()) ,
+    () => runApp(const MyApp()),
   );
 }
 
@@ -19,6 +19,7 @@ class MyApp extends StatelessWidget {
       create: (context) =>
           TasksBloc()..add(AddTask(task: Task(title: 'task1'))),
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),

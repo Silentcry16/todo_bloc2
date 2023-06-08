@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:todo_bloc2/models/task.dart';
 
 import '../bloc/bloc_exports.dart';
+import '../widgets/add_task_screen.dart';
 import '../widgets/task_list.dart';
 
 class TaskScreen extends StatelessWidget {
@@ -31,7 +32,13 @@ class TaskScreen extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             title: const Text('Todo'),
-            actions: [const Icon(Icons.add)],
+            actions: [
+              IconButton(
+                icon: const Icon(Icons.add),
+                //opens the BottomSheet to add a new task
+                onPressed: () => _addTask(context),
+              )
+            ],
           ),
           body: Column(
             children: [
@@ -39,72 +46,11 @@ class TaskScreen extends StatelessWidget {
               TaskList(taskList: taskList),
             ],
           ),
+          //opens the BottomSheet to add a new task
           floatingActionButton: FloatingActionButton(
               onPressed: () => _addTask(context), child: const Icon(Icons.add)),
         );
       },
-    );
-  }
-}
-
-class AddTaskScreen extends StatelessWidget {
-  const AddTaskScreen({
-    super.key,
-    required TextEditingController titleController,
-  }) : _titleController = titleController;
-
-  final TextEditingController _titleController;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(20),
-      child: Column(
-        children: [
-          const Text(
-            'Add a task',
-            style: TextStyle(fontSize: 26),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          TextField(
-            autofocus: true,
-            controller: _titleController,
-            decoration: InputDecoration(
-                hintText: 'Title...',
-                labelText: 'Task Title',
-                prefixIcon: Icon(Icons.text_fields),
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
-                    borderSide: BorderSide(color: Colors.black26))),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Expanded(
-                    child: ElevatedButton(
-                        onPressed: () => Navigator.of(context).pop(),
-                        child: Text('Cancell'))),
-                SizedBox(
-                  width: 20,
-                ),
-                Expanded(
-                    child: ElevatedButton(
-                        onPressed: () {
-                          var task = Task(title: _titleController.text);
-                          context.read<TasksBloc>().add(AddTask(task: task));
-                          Navigator.of(context).pop();
-                          _titleController.clear();
-                        },
-                        child: Text('Add'))),
-              ],
-            ),
-          ),
-        ],
-      ),
     );
   }
 }
