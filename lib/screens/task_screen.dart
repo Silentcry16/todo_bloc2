@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_bloc2/models/task.dart';
+import 'package:todo_bloc2/widgets/custom_drawer.dart';
 
 import '../bloc/bloc_exports.dart';
 import '../widgets/add_task_screen.dart';
@@ -30,6 +31,9 @@ class TaskScreen extends StatelessWidget {
       builder: (context, state) {
         List<Task> taskList = state.allTasks;
         return Scaffold(
+          drawer: Container(
+              width: MediaQuery.of(context).size.width * 0.65,
+              child: CustomDrawer()),
           appBar: AppBar(
             title: const Text('Todo'),
             actions: [
