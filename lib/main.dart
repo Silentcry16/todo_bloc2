@@ -5,12 +5,10 @@ import './bloc/bloc_exports.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   HydratedBloc.storage = await HydratedStorage.build(
-    storageDirectory: await getApplicationDocumentsDirectory(),
-  );
+      storageDirectory: await getApplicationDocumentsDirectory());
 
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {

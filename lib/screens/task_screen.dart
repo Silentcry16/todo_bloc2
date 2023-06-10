@@ -42,7 +42,8 @@ class TaskScreen extends StatelessWidget {
           ),
           body: Column(
             children: [
-              const Center(child: Chip(label: Text('Tasks:'))),
+              Center(
+                  child: Chip(label: Text('${state.allTasks.length} Tasks'))),
               TaskList(taskList: taskList),
             ],
           ),
