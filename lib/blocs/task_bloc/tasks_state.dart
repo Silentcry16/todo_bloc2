@@ -13,9 +13,7 @@ class TasksState extends Equatable {
   @override
   List<Object> get props => [allTasks, removedTasks];
 
-
-
-// toMap() and fromMap() are responsible for converting 
+// toMap() and fromMap() are responsible for converting
 //the state object to a map representation and reconstructing the state
 //object from a map, respectively.
 
@@ -29,16 +27,15 @@ class TasksState extends Equatable {
   factory TasksState.fromMap(Map<String, dynamic> map) {
     return TasksState(
       allTasks: List<Task>.from(
-        (map['allTasks'] as List<int>).map<Task>(
+        (map['allTasks']).map<Task>(
           (x) => Task.fromMap(x as Map<String, dynamic>),
         ),
       ),
       removedTasks: List<Task>.from(
-        (map['removedTasks'] as List<int>).map<Task>(
+        (map['removedTasks']).map<Task>(
           (x) => Task.fromMap(x as Map<String, dynamic>),
         ),
       ),
     );
   }
 }
-

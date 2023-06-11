@@ -27,7 +27,8 @@ class CustomDrawer extends StatelessWidget {
                 BlocBuilder<SwitchBloc, SwitchState>(
                   builder: (context, state) {
                     return Container(
-                      // color: Colors.amber[200],
+                      color:
+                          state.switchValue ? Colors.black12 : Colors.grey[200],
                       child: ListTile(
                         leading: Icon(Icons.color_lens),
                         title: state.switchValue
