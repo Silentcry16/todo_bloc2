@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.amber,
         ),
-        home: TaskScreen(),
+        home: const TaskScreen(),
         onGenerateRoute: appRouter.onGenerateRoute,
       ),
     );

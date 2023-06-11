@@ -4,12 +4,7 @@ import 'package:todo_bloc2/bloc/bloc_exports.dart';
 import '../models/task.dart';
 
 class AddTaskScreen extends StatefulWidget {
-  const AddTaskScreen({
-    super.key,
-    required TextEditingController titleController,
-  }) : _titleController = titleController;
-
-  final TextEditingController _titleController;
+  const AddTaskScreen({Key? key}) : super(key: key);
 
   @override
   State<AddTaskScreen> createState() => _AddTaskScreenState();
@@ -18,7 +13,9 @@ class AddTaskScreen extends StatefulWidget {
 class _AddTaskScreenState extends State<AddTaskScreen> {
   @override
   Widget build(BuildContext context) {
+    TextEditingController titleController = TextEditingController();
     return Container(
+      margin: const EdgeInsets.only(bottom: 10),
       padding: const EdgeInsets.all(20),
       child: Column(
         children: [
@@ -31,7 +28,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
           ),
           TextField(
             autofocus: true,
-            controller: widget._titleController,
+            controller: titleController,
             decoration: InputDecoration(
                 hintText: 'Title...',
                 labelText: 'Task Title',
@@ -55,10 +52,10 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                 Expanded(
                     child: ElevatedButton(
                         onPressed: () {
-                          var task = Task(title: widget._titleController.text);
+                          var task = Task(title: titleController.text);
                           context.read<TasksBloc>().add(AddTask(task: task));
                           Navigator.of(context).pop();
-                          widget._titleController.clear();
+                          titleController.clear();
                         },
                         child: const Text('Add'))),
               ],

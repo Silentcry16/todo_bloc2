@@ -7,9 +7,8 @@ import '../widgets/add_task_screen.dart';
 import '../widgets/task_list.dart';
 
 class TaskScreen extends StatelessWidget {
-  TaskScreen({super.key});
+  const TaskScreen({super.key});
 
-  final _titleController = TextEditingController();
   static const id = 'task_screen';
   void _addTask(BuildContext context) {
     showModalBottomSheet(
@@ -19,7 +18,7 @@ class TaskScreen extends StatelessWidget {
           child: Container(
               padding: EdgeInsets.only(
                   bottom: MediaQuery.of(context).viewInsets.bottom),
-              child: AddTaskScreen(titleController: _titleController)),
+              child: const AddTaskScreen()),
         );
       },
     );

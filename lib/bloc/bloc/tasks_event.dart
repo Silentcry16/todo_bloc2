@@ -7,6 +7,7 @@ abstract class TasksEvent extends Equatable {
   List<Object> get props => [];
 }
 
+//Adds the Tasks to the allTasks!!
 class AddTask extends TasksEvent {
   final Task task;
 
@@ -15,6 +16,7 @@ class AddTask extends TasksEvent {
   List<Object> get props => [task];
 }
 
+//Marks Events as Done or UnDone!!
 class UpdateTask extends TasksEvent {
   final Task task;
 
@@ -23,6 +25,7 @@ class UpdateTask extends TasksEvent {
   List<Object> get props => [task];
 }
 
+//Adds the Tasks to the RemovedList!!
 class RemoveTask extends TasksEvent {
   final Task task;
 
@@ -31,6 +34,7 @@ class RemoveTask extends TasksEvent {
   List<Object> get props => [task];
 }
 
+//Delete selected tasks from RemovedList!!
 class DeleteTask extends TasksEvent {
   final Task task;
 

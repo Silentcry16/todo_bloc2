@@ -16,6 +16,7 @@ class TasksBloc extends HydratedBloc<TasksEvent, TasksState> {
   void _onAddTask(AddTask event, Emitter<TasksState> emit) {
     final state = this.state;
     emit(TasksState(
+        //add a new Task Object to the total taskList
         allTasks: List.from(state.allTasks)..add(event.task),
         removedTasks: state.removedTasks));
   }

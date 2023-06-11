@@ -11,7 +11,7 @@ class AppRouter {
         );
       case TaskScreen.id:
         return MaterialPageRoute(
-          builder: (_) => TaskScreen(),
+          builder: (_) => const TaskScreen(),
         );
       default:
         return null;
