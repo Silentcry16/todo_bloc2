@@ -7,7 +7,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:todo_bloc2/app_router.dart';
+import 'package:todo_bloc2/services/app_router.dart';
 
 import 'package:todo_bloc2/main.dart';
 

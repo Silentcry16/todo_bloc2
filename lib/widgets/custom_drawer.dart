@@ -2,17 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:todo_bloc2/screens/recycle_bin_screen.dart';
 import 'package:todo_bloc2/screens/task_screen.dart';
 
-import '../bloc/bloc_exports.dart';
+import '../blocs/bloc_exports.dart';
 
-class CustomDrawer extends StatefulWidget {
+class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});
 
-  @override
-  State<CustomDrawer> createState() => _CustomDrawerState();
-}
-
-class _CustomDrawerState extends State<CustomDrawer> {
-  bool _switchValue = false;
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -28,22 +22,37 @@ class _CustomDrawerState extends State<CustomDrawer> {
                 ),
                 title: Text('Hello Dear Friend'),
               ),
-              Container(
-                color: Colors.amber[200],
-                child: ListTile(
-                  leading: Icon(Icons.color_lens),
-                  title: Text('Dark'),
-                  trailing: Switch(
-                    value: _switchValue,
-                    onChanged: (newValue) {
-                      setState(() {
-                        _switchValue = newValue;
-                      });
-                    },
-                    thumbColor: MaterialStatePropertyAll(Colors.white),
-                    trackColor: MaterialStatePropertyAll(Colors.black38),
-                  ),
-                ),
+              BlocBuilder<SwitchBloc, SwitchState>(
+                builder: (context, state) {
+                  return Container(
+                    // color: Colors.amber[200],
+                    child: ListTile(
+                      leading: Icon(Icons.color_lens),
+                      title: state.switchValue
+                          ? Text('Dark Theme')
+                          : Text('Light Theme'),
+                      trailing: BlocBuilder<SwitchBloc, SwitchState>(
+                        builder: (context, state) {
+                          return Switch(
+                            value: state.switchValue,
+                            onChanged: (newValue) {
+                              newValue
+                                  ? context
+                                      .read<SwitchBloc>()
+                                      .add(switchOnEvent())
+                                  : context
+                                      .read<SwitchBloc>()
+                                      .add(switchOffEvent());
+                            },
+                            thumbColor: MaterialStatePropertyAll(Colors.white),
+                            trackColor:
+                                MaterialStatePropertyAll(Colors.black38),
+                          );
+                        },
+                      ),
+                    ),
+                  );
+                },
               ),
               GestureDetector(
                 onTap: () =>

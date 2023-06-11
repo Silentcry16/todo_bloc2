@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import '../../bloc/bloc_exports.dart';
+import '../../blocs/bloc_exports.dart';
 import 'package:todo_bloc2/models/task.dart';
 
 part 'tasks_event.dart';

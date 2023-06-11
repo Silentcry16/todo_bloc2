@@ -1,8 +1,8 @@
 import 'package:path_provider/path_provider.dart';
-import 'package:todo_bloc2/app_router.dart';
+import 'package:todo_bloc2/services/app_router.dart';
 import 'package:todo_bloc2/screens/task_screen.dart';
 import 'package:flutter/material.dart';
-import './bloc/bloc_exports.dart';
+import './blocs/bloc_exports.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,15 +20,24 @@ class MyApp extends StatelessWidget {
   final AppRouter appRouter;
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => TasksBloc(),
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          primarySwatch: Colors.amber,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<TasksBloc>(
+          create: (BuildContext context) => TasksBloc(),
         ),
-        home: const TaskScreen(),
-        onGenerateRoute: appRouter.onGenerateRoute,
+        BlocProvider<SwitchBloc>(
+          create: (BuildContext context) => SwitchBloc(),
+        ),
+      ],
+      child: BlocBuilder<SwitchBloc, SwitchState>(
+        builder: (context, state) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            theme: state.switchValue ? ThemeData.dark() : ThemeData.light(),
+            home: const TaskScreen(),
+            onGenerateRoute: appRouter.onGenerateRoute,
+          );
+        },
       ),
     );
   }

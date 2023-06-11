@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../bloc/bloc_exports.dart';
+import '../blocs/bloc_exports.dart';
 import '../widgets/custom_drawer.dart';
 import '../widgets/task_list.dart';
 
@@ -18,13 +18,6 @@ class RecycleBinScreen extends StatelessWidget {
               child: const CustomDrawer()),
           appBar: AppBar(
             title: const Text('Recycle Bin'),
-            actions: [
-              IconButton(
-                icon: const Icon(Icons.add),
-                //opens the BottomSheet to add a new task
-                onPressed: () {},
-              )
-            ],
           ),
           body: Column(
             children: [

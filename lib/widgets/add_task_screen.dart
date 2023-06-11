@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todo_bloc2/bloc/bloc_exports.dart';
+import 'package:todo_bloc2/blocs/bloc_exports.dart';
 import 'package:todo_bloc2/services/guid_gen.dart';
 
 import '../models/task.dart';
