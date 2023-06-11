@@ -11,7 +11,13 @@ class TasksState extends Equatable {
   });
 
   @override
-  List<Object> get props => [allTasks,removedTasks];
+  List<Object> get props => [allTasks, removedTasks];
+
+
+
+// toMap() and fromMap() are responsible for converting 
+//the state object to a map representation and reconstructing the state
+//object from a map, respectively.
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -26,14 +32,13 @@ class TasksState extends Equatable {
         (map['allTasks'] as List<int>).map<Task>(
           (x) => Task.fromMap(x as Map<String, dynamic>),
         ),
-        
       ),
       removedTasks: List<Task>.from(
         (map['removedTasks'] as List<int>).map<Task>(
           (x) => Task.fromMap(x as Map<String, dynamic>),
         ),
-        
       ),
     );
   }
 }
+

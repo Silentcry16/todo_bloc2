@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_bloc2/bloc/bloc_exports.dart';
+import 'package:todo_bloc2/services/guid_gen.dart';
 
 import '../models/task.dart';
 
@@ -52,7 +53,10 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                 Expanded(
                     child: ElevatedButton(
                         onPressed: () {
-                          var task = Task(title: titleController.text);
+                          var task = Task(
+                            id: GUIDGen.generate(),
+                            title: titleController.text,
+                          );
                           context.read<TasksBloc>().add(AddTask(task: task));
                           Navigator.of(context).pop();
                           titleController.clear();

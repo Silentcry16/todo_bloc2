@@ -25,7 +25,7 @@ class TasksBloc extends HydratedBloc<TasksEvent, TasksState> {
     final state = this.state;
     final task = event.task;
     final int index = state.allTasks.indexOf(task);
-
+    //creating new taskList and removing the old task
     List<Task> allTask = List.from(state.allTasks)..remove(task);
 
     task.isDone == false

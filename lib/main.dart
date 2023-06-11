@@ -4,8 +4,9 @@ import 'package:todo_bloc2/screens/task_screen.dart';
 import 'package:flutter/material.dart';
 import './bloc/bloc_exports.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   HydratedBloc.storage = await HydratedStorage.build(
       storageDirectory: await getApplicationDocumentsDirectory());
 
