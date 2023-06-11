@@ -13,71 +13,69 @@ class CustomDrawer extends StatelessWidget {
       elevation: 10,
       child: BlocBuilder<TasksBloc, TasksState>(
         builder: (context, state) {
-          return Column(
-            children: [
-              AppBar(
-                leading: IconButton(
-                  onPressed: () => Navigator.of(context).pop(),
-                  icon: const Icon(Icons.close),
+          return Container(
+            height: MediaQuery.of(context).size.height * 0.8,
+            child: Column(
+              children: [
+                AppBar(
+                  leading: IconButton(
+                    onPressed: () => Navigator.of(context).pop(),
+                    icon: const Icon(Icons.close),
+                  ),
+                  title: Text('Hello Dear Friend'),
                 ),
-                title: Text('Hello Dear Friend'),
-              ),
-              BlocBuilder<SwitchBloc, SwitchState>(
-                builder: (context, state) {
-                  return Container(
-                    // color: Colors.amber[200],
-                    child: ListTile(
-                      leading: Icon(Icons.color_lens),
-                      title: state.switchValue
-                          ? Text('Dark Theme')
-                          : Text('Light Theme'),
-                      trailing: BlocBuilder<SwitchBloc, SwitchState>(
-                        builder: (context, state) {
-                          return Switch(
-                            value: state.switchValue,
-                            onChanged: (newValue) {
-                              newValue
-                                  ? context
-                                      .read<SwitchBloc>()
-                                      .add(switchOnEvent())
-                                  : context
-                                      .read<SwitchBloc>()
-                                      .add(switchOffEvent());
-                            },
-                            thumbColor: MaterialStatePropertyAll(Colors.white),
-                            trackColor:
-                                MaterialStatePropertyAll(Colors.black38),
-                          );
-                        },
+                BlocBuilder<SwitchBloc, SwitchState>(
+                  builder: (context, state) {
+                    return Container(
+                      // color: Colors.amber[200],
+                      child: ListTile(
+                        leading: Icon(Icons.color_lens),
+                        title: state.switchValue
+                            ? Text('Dark Theme')
+                            : Text('Light Theme'),
+                        trailing: Switch(
+                          value: state.switchValue,
+                          onChanged: (newValue) {
+                            newValue
+                                ? context
+                                    .read<SwitchBloc>()
+                                    .add(switchOnEvent())
+                                : context
+                                    .read<SwitchBloc>()
+                                    .add(switchOffEvent());
+                          },
+                          thumbColor: MaterialStatePropertyAll(Colors.white),
+                          trackColor: MaterialStatePropertyAll(Colors.black38),
+                        ),
                       ),
-                    ),
-                  );
-                },
-              ),
-              GestureDetector(
-                onTap: () =>
-                    Navigator.of(context).pushReplacementNamed(TaskScreen.id),
-                child: ListTile(
-                  leading: const Icon(Icons.list),
-                  title: const Text('Task'),
-                  trailing: Text('${state.allTasks.length}'),
+                    );
+                  },
                 ),
-              ),
-              const Divider(),
-              BlocBuilder<TasksBloc, TasksState>(
-                builder: (context, state) {
-                  return GestureDetector(
-                    onTap: () => Navigator.of(context)
-                        .pushReplacementNamed(RecycleBinScreen.id),
-                    child: ListTile(
-                      leading: const Icon(Icons.delete),
-                      title: const Text('Recycle Bin'),
-                      trailing: Text('${state.removedTasks.length}'),
-                    ),
-                  );
-                },
-              ),
-            ],
+                GestureDetector(
+                  onTap: () =>
+                      Navigator.of(context).pushReplacementNamed(TaskScreen.id),
+                  child: ListTile(
+                    leading: const Icon(Icons.list),
+                    title: const Text('Task'),
+                    trailing: Text('${state.allTasks.length}'),
+                  ),
+                ),
+                const Divider(),
+                BlocBuilder<TasksBloc, TasksState>(
+                  builder: (context, state) {
+                    return GestureDetector(
+                      onTap: () => Navigator.of(context)
+                          .pushReplacementNamed(RecycleBinScreen.id),
+                      child: ListTile(
+                        leading: const Icon(Icons.delete),
+                        title: const Text('Recycle Bin'),
+                        trailing: Text('${state.removedTasks.length}'),
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ),
           );
         },
       ),

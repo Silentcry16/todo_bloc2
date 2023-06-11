@@ -21,8 +21,6 @@ class AppThemes {
       textTheme: const TextTheme(
         titleMedium: TextStyle(color: Colors.white),
       ),
-      listTileTheme:
-          ListTileThemeData(titleTextStyle: TextStyle(color: Colors.black)),
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
           backgroundColor: Colors.grey,
           selectedItemColor: Colors.white,
