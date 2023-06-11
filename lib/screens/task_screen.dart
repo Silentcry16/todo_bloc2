@@ -10,7 +10,7 @@ class TaskScreen extends StatelessWidget {
   TaskScreen({super.key});
 
   final _titleController = TextEditingController();
-
+  static const id = 'task_screen';
   void _addTask(BuildContext context) {
     showModalBottomSheet(
       context: context,
@@ -31,9 +31,9 @@ class TaskScreen extends StatelessWidget {
       builder: (context, state) {
         List<Task> taskList = state.allTasks;
         return Scaffold(
-          drawer: Container(
+          drawer: SizedBox(
               width: MediaQuery.of(context).size.width * 0.65,
-              child: CustomDrawer()),
+              child: const CustomDrawer()),
           appBar: AppBar(
             title: const Text('Todo'),
             actions: [

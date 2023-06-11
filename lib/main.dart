@@ -1,4 +1,5 @@
 import 'package:path_provider/path_provider.dart';
+import 'package:todo_bloc2/app_router.dart';
 import 'package:todo_bloc2/screens/task_screen.dart';
 import 'package:flutter/material.dart';
 import './bloc/bloc_exports.dart';
@@ -8,12 +9,14 @@ void main() async {
   HydratedBloc.storage = await HydratedStorage.build(
       storageDirectory: await getApplicationDocumentsDirectory());
 
-  runApp(const MyApp());
+  runApp(MyApp(
+    appRouter: AppRouter(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
+  const MyApp({Key? key, required this.appRouter}) : super(key: key);
+  final AppRouter appRouter;
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -24,6 +27,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.amber,
         ),
         home: TaskScreen(),
+        onGenerateRoute: appRouter.onGenerateRoute,
       ),
     );
   }
