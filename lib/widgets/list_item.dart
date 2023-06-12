@@ -21,6 +21,7 @@ class ListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       leading: Checkbox(
+          fillColor: MaterialStateProperty.all(Color(0xFFFF9E00)),
           value: task.isDone,
           onChanged: (val) {
             context.read<TasksBloc>().add(UpdateTask(task: task));
@@ -37,7 +38,12 @@ class ListItem extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             IconButton(onPressed: () {}, icon: Icon(Icons.favorite)),
-            IconButton(onPressed: () {}, icon: Icon(Icons.delete)),
+            IconButton(
+                onPressed: () {},
+                icon: Icon(
+                  Icons.delete,
+                  color: Color(0xFFFF7900),
+                )),
           ],
         ),
       ),
