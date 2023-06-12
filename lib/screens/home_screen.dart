@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:flutter/material.dart';
 import 'package:todo_bloc2/screens/favorite_tasks_screen.dart';
 import 'package:todo_bloc2/screens/task_screen.dart';
@@ -29,11 +31,11 @@ class _HomeScreenState extends State<HomeScreen> {
           child: const CustomDrawer()),
       appBar: AppBar(
         title: currentIndex == BottomNavIndex.tasksIndex
-            ? Text('Todo')
+            ? const Text('Todo')
             : currentIndex == BottomNavIndex.completedIndex
-                ? Text('Completed')
+                ? const Text('Completed')
                 : currentIndex == BottomNavIndex.favoriteIndex
-                    ? Text('Favorite')
+                    ? const Text('Favorite')
                     : null,
         actions: [
           currentIndex == BottomNavIndex.tasksIndex
@@ -42,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   //opens the BottomSheet to add a new task
                   onPressed: () => _addTask(context),
                 )
-              : SizedBox.shrink()
+              : const SizedBox.shrink()
         ],
       ),
       body: SafeArea(
@@ -99,7 +101,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return BlocBuilder<SwitchBloc, SwitchState>(
       builder: (context, state) {
         return Container(
-          color: state.switchValue ? Colors.grey : Color(0xFF7b2cbf),
+          color: state.switchValue ? Colors.grey : const Color(0xFF7b2cbf),
           height: MediaQuery.of(context).size.height * 0.07,
           width: double.infinity,
           child: Row(
@@ -112,7 +114,6 @@ class _HomeScreenState extends State<HomeScreen> {
                           setState(() {
                             currentIndex = BottomNavIndex.tasksIndex;
                           });
-                          print(currentIndex);
                         },
                         icon: currentIndex == BottomNavIndex.tasksIndex
                             ? const Icon(
@@ -128,9 +129,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     currentIndex == BottomNavIndex.tasksIndex
                         ? Container(
                             height: 3,
-                            decoration: BoxDecoration(color: Colors.white),
+                            decoration:
+                                const BoxDecoration(color: Colors.white),
                           )
-                        : SizedBox.shrink(),
+                        : const SizedBox.shrink(),
                   ],
                 ),
               ),
@@ -142,7 +144,6 @@ class _HomeScreenState extends State<HomeScreen> {
                           setState(() {
                             currentIndex = BottomNavIndex.completedIndex;
                           });
-                          print(currentIndex);
                         },
                         icon: currentIndex == BottomNavIndex.completedIndex
                             ? const Icon(
@@ -158,9 +159,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     currentIndex == BottomNavIndex.completedIndex
                         ? Container(
                             height: 3,
-                            decoration: BoxDecoration(color: Colors.white),
+                            decoration:
+                                const BoxDecoration(color: Colors.white),
                           )
-                        : SizedBox.shrink(),
+                        : const SizedBox.shrink(),
                   ],
                 ),
               ),
@@ -172,7 +174,6 @@ class _HomeScreenState extends State<HomeScreen> {
                           setState(() {
                             currentIndex = BottomNavIndex.favoriteIndex;
                           });
-                          print(currentIndex);
                         },
                         icon: currentIndex == BottomNavIndex.favoriteIndex
                             ? const Icon(
@@ -188,9 +189,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     currentIndex == BottomNavIndex.favoriteIndex
                         ? Container(
                             height: 3,
-                            decoration: BoxDecoration(color: Colors.white),
+                            decoration:
+                                const BoxDecoration(color: Colors.white),
                           )
-                        : SizedBox.shrink(),
+                        : const SizedBox.shrink(),
                   ],
                 ),
               ),

@@ -84,7 +84,7 @@ class TasksBloc extends HydratedBloc<TasksEvent, TasksState> {
           pendingTasks: state.pendingTasks,
           completedTasks: state.completedTasks,
           favoriteTasks: state.favoriteTasks,
-          removedTasks: []),
+          removedTasks: const []),
     );
   }
 

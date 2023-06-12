@@ -10,7 +10,7 @@ class CustomNavigationBar extends StatefulWidget {
 class _CustomNavigationBarState extends State<CustomNavigationBar> {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: double.infinity,
       child: Row(
         children: [
@@ -21,7 +21,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
                     widget.index == 1;
                   });
                 },
-                icon: Icon(Icons.pending)),
+                icon: const Icon(Icons.pending)),
           ),
           Expanded(
             child: IconButton(
@@ -30,7 +30,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
                     widget.index == 2;
                   });
                 },
-                icon: Icon(Icons.done)),
+                icon: const Icon(Icons.done)),
           ),
           Expanded(
             child: IconButton(
@@ -39,7 +39,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
                     widget.index == 3;
                   });
                 },
-                icon: Icon(Icons.favorite)),
+                icon: const Icon(Icons.favorite)),
           ),
         ],
       ),

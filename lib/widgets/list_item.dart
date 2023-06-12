@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../blocs/bloc_exports.dart';
 import '../models/task.dart';
@@ -32,19 +33,48 @@ class ListItem extends StatelessWidget {
         style: TextStyle(
             decoration: task.isDone! ? TextDecoration.lineThrough : null),
       ),
+      subtitle: Text(DateFormat.yMMMd().format(DateTime.parse(task.regDate))),
       trailing: Container(
         // color: Colors.amber,
         width: 110,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            IconButton(onPressed: () {}, icon: Icon(Icons.favorite)),
-            IconButton(
-                onPressed: () => _removeOrDeleteTask(context, task),
-                icon: Icon(
-                  Icons.delete,
-                  color: Color(0xFFFF7900),
-                )),
+            IconButton(onPressed: () {}, icon: Icon(Icons.star_border_rounded)),
+            PopupMenuButton(
+              itemBuilder: (context) => [
+                PopupMenuItem(
+                  child: TextButton.icon(
+                    style: ButtonStyle(
+                        foregroundColor:
+                            MaterialStateProperty.all(Colors.black)),
+                    onPressed: () {},
+                    icon: Icon(Icons.edit),
+                    label: Text('Edit'),
+                  ),
+                ),
+                PopupMenuItem(
+                  child: TextButton.icon(
+                    style: ButtonStyle(
+                        foregroundColor:
+                            MaterialStateProperty.all(Colors.black)),
+                    onPressed: () {},
+                    icon: Icon(Icons.bookmark),
+                    label: Text('Add to Bookmark'),
+                  ),
+                ),
+                PopupMenuItem(
+                  child: TextButton.icon(
+                    style: ButtonStyle(
+                        foregroundColor:
+                            MaterialStateProperty.all(Colors.black)),
+                    onPressed: () {},
+                    icon: Icon(Icons.delete),
+                    label: Text('Delete'),
+                  ),
+                ),
+              ],
+            )
           ],
         ),
       ),

@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:flutter/material.dart';
 
 enum AppTheme { lightTheme, darkTheme }
@@ -28,8 +30,7 @@ class AppThemes {
 
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          primary: Colors.grey, // Set the button background color
-          onPrimary: Colors.white, // Set the text color
+          foregroundColor: Colors.white, backgroundColor: Colors.grey, // Set the text color
           elevation: 5, // Set the button elevation
           shape: RoundedRectangleBorder(
             borderRadius:
@@ -59,10 +60,17 @@ class AppThemes {
             color: Colors.white, // Set the color of the hint text
           ),
           prefixIconColor: Colors.grey,
-          labelStyle: TextStyle(color: Colors.white)),
+          labelStyle: const TextStyle(color: Colors.white)),
     ),
     //
     //
+    //
+    //
+    //
+    //
+    //
+    //
+
     AppTheme.lightTheme: ThemeData(
       primaryColor: Colors.white,
       brightness: Brightness.light,
@@ -83,8 +91,7 @@ class AppThemes {
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          primary: const Color(0xFF7B2CBF), // Set the button background color
-          onPrimary: Colors.white, // Set the text color
+          foregroundColor: Colors.white, backgroundColor: const Color(0xFF7B2CBF), // Set the text color
           elevation: 5, // Set the button elevation
           shape: RoundedRectangleBorder(
             borderRadius:
@@ -120,6 +127,7 @@ class AppThemes {
           unselectedItemColor: Colors.white),
       colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.grey)
           .copyWith(background: const Color(0xFFE5E5E5)),
+      // Customizing the colors for ExpansionPanelList
     ),
   };
 }

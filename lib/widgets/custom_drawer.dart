@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_bloc2/screens/home_screen.dart';
 import 'package:todo_bloc2/screens/recycle_bin_screen.dart';
-import 'package:todo_bloc2/screens/task_screen.dart';
 
 import '../blocs/bloc_exports.dart';
 
@@ -41,10 +40,10 @@ class CustomDrawer extends StatelessWidget {
                             newValue
                                 ? context
                                     .read<SwitchBloc>()
-                                    .add(switchOnEvent())
+                                    .add(SwitchOnEvent())
                                 : context
                                     .read<SwitchBloc>()
-                                    .add(switchOffEvent());
+                                    .add(SwitchOffEvent());
                           },
                           thumbColor:
                               const MaterialStatePropertyAll(Colors.white),
