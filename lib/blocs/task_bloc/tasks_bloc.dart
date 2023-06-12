@@ -15,30 +15,35 @@ class TasksBloc extends HydratedBloc<TasksEvent, TasksState> {
 
   void _onAddTask(AddTask event, Emitter<TasksState> emit) {
     final state = this.state;
-    emit(TasksState(
+    emit(
+      TasksState(
         //add a new Task Object to the total taskList
-        allTasks: List.from(state.allTasks)..add(event.task),
-        removedTasks: state.removedTasks));
+        pendingTasks: List.from(state.pendingTasks)..add(event.task),
+        completedTasks: state.completedTasks,
+        favoriteTasks: state.favoriteTasks,
+        removedTasks: state.removedTasks,
+      ),
+    );
   }
 
   void _onUpdateTask(UpdateTask event, Emitter<TasksState> emit) {
     final state = this.state;
     final task = event.task;
-    final int index = state.allTasks.indexOf(task);
+    final int index = state.pendingTasks.indexOf(task);
     //creating new taskList and removing the old task
-    List<Task> allTask = List.from(state.allTasks)..remove(task);
+    List<Task> allTask = List.from(state.pendingTasks)..remove(task);
 
     task.isDone == false
         ? allTask.insert(index, task.copyWith(isDone: true))
         : allTask.insert(index, task.copyWith(isDone: false));
 
-    emit(TasksState(allTasks: allTask, removedTasks: state.removedTasks));
+    emit(TasksState(pendingTasks: allTask, removedTasks: state.removedTasks));
   }
 
   void _onDeleteTask(DeleteTask event, Emitter<TasksState> emit) {
     final state = this.state;
     emit(TasksState(
-        allTasks: state.allTasks,
+        pendingTasks: state.pendingTasks,
         removedTasks: List.from(state.removedTasks)..remove(event.task)));
   }
 
@@ -46,7 +51,7 @@ class TasksBloc extends HydratedBloc<TasksEvent, TasksState> {
     final state = this.state;
     emit(
       TasksState(
-          allTasks: List.from(state.allTasks)..remove(event.task),
+          pendingTasks: List.from(state.pendingTasks)..remove(event.task),
           removedTasks: List.from(state.removedTasks)
             ..add(event.task.copyWith(isDeleted: true))),
     );

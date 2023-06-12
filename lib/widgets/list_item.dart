@@ -20,16 +20,27 @@ class ListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      leading: Checkbox(
+          value: task.isDone,
+          onChanged: (val) {
+            context.read<TasksBloc>().add(UpdateTask(task: task));
+          }),
       title: Text(
         task.title,
         style: TextStyle(
             decoration: task.isDone! ? TextDecoration.lineThrough : null),
       ),
-      trailing: Checkbox(
-          value: task.isDone,
-          onChanged: (val) {
-            context.read<TasksBloc>().add(UpdateTask(task: task));
-          }),
+      trailing: Container(
+        // color: Colors.amber,
+        width: 110,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            IconButton(onPressed: () {}, icon: Icon(Icons.favorite)),
+            IconButton(onPressed: () {}, icon: Icon(Icons.delete)),
+          ],
+        ),
+      ),
       onLongPress: () => _removeOrDeleteTask(context, task),
     );
   }

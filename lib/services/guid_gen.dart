@@ -2,7 +2,7 @@ import 'dart:math';
 
 class GUIDGen {
   static String generate() {
-    Random random = Random(new DateTime.now().millisecond);
+    Random random = Random(DateTime.now().millisecond);
 
     const String hexDigits = "0123456789abcdef";
     final List<String> uuid = List.filled(36, '', growable: true);
@@ -20,7 +20,7 @@ class GUIDGen {
 
     uuid[8] = uuid[13] = uuid[18] = uuid[23] = "-";
 
-    final StringBuffer buffer = new StringBuffer();
+    final StringBuffer buffer = StringBuffer();
     buffer.writeAll(uuid);
     return buffer.toString();
   }

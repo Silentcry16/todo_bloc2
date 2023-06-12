@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_bloc2/screens/home_screen.dart';
 import 'package:todo_bloc2/screens/recycle_bin_screen.dart';
 import 'package:todo_bloc2/screens/task_screen.dart';
 
@@ -13,7 +14,7 @@ class CustomDrawer extends StatelessWidget {
       elevation: 10,
       child: BlocBuilder<TasksBloc, TasksState>(
         builder: (context, state) {
-          return Container(
+          return SizedBox(
             height: MediaQuery.of(context).size.height * 0.8,
             child: Column(
               children: [
@@ -22,7 +23,7 @@ class CustomDrawer extends StatelessWidget {
                     onPressed: () => Navigator.of(context).pop(),
                     icon: const Icon(Icons.close),
                   ),
-                  title: Text('Hello Dear Friend'),
+                  title: const Text('Hello Dear Friend'),
                 ),
                 BlocBuilder<SwitchBloc, SwitchState>(
                   builder: (context, state) {
@@ -30,10 +31,10 @@ class CustomDrawer extends StatelessWidget {
                       color:
                           state.switchValue ? Colors.black12 : Colors.grey[200],
                       child: ListTile(
-                        leading: Icon(Icons.color_lens),
+                        leading: const Icon(Icons.color_lens),
                         title: state.switchValue
-                            ? Text('Dark Theme')
-                            : Text('Light Theme'),
+                            ? const Text('Dark Theme')
+                            : const Text('Light Theme'),
                         trailing: Switch(
                           value: state.switchValue,
                           onChanged: (newValue) {
@@ -45,8 +46,10 @@ class CustomDrawer extends StatelessWidget {
                                     .read<SwitchBloc>()
                                     .add(switchOffEvent());
                           },
-                          thumbColor: MaterialStatePropertyAll(Colors.white),
-                          trackColor: MaterialStatePropertyAll(Colors.black38),
+                          thumbColor:
+                              const MaterialStatePropertyAll(Colors.white),
+                          trackColor:
+                              const MaterialStatePropertyAll(Colors.black38),
                         ),
                       ),
                     );
@@ -54,11 +57,11 @@ class CustomDrawer extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () =>
-                      Navigator.of(context).pushReplacementNamed(TaskScreen.id),
+                      Navigator.of(context).pushReplacementNamed(HomeScreen.id),
                   child: ListTile(
                     leading: const Icon(Icons.list),
-                    title: const Text('Task'),
-                    trailing: Text('${state.allTasks.length}'),
+                    title: const Text('Home'),
+                    trailing: Text('${state.pendingTasks.length}'),
                   ),
                 ),
                 const Divider(),

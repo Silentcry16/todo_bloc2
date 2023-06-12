@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_bloc2/screens/home_screen.dart';
 import 'package:todo_bloc2/screens/recycle_bin_screen.dart';
 import 'package:todo_bloc2/screens/task_screen.dart';
 
@@ -9,9 +10,9 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => const RecycleBinScreen(),
         );
-      case TaskScreen.id:
+      case HomeScreen.id:
         return MaterialPageRoute(
-          builder: (_) => const TaskScreen(),
+          builder: (_) => const HomeScreen(),
         );
       default:
         return null;

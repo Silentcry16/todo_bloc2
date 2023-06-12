@@ -6,8 +6,8 @@ import '../blocs/bloc_exports.dart';
 import '../widgets/add_task_screen.dart';
 import '../widgets/task_list.dart';
 
-class TaskScreen extends StatelessWidget {
-  const TaskScreen({super.key});
+class CompletedTasksScreen extends StatelessWidget {
+  const CompletedTasksScreen({super.key});
 
   static const id = 'task_screen';
   void _addTask(BuildContext context) {
@@ -28,19 +28,17 @@ class TaskScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<TasksBloc, TasksState>(
       builder: (context, state) {
-        List<Task> taskList = state.pendingTasks;
+        List<Task> taskList = state.completedTasks;
         return Scaffold(
           body: Column(
             children: [
               Center(
-                  child:
-                      Chip(label: Text('${state.pendingTasks.length} Tasks'))),
+                  child: Chip(
+                      label: Text('${state.completedTasks.length} Tasks'))),
               TaskList(taskList: taskList),
             ],
           ),
           //opens the BottomSheet to add a new task
-          floatingActionButton: FloatingActionButton(
-              onPressed: () => _addTask(context), child: const Icon(Icons.add)),
         );
       },
     );
