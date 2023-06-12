@@ -28,6 +28,7 @@ class ListItem extends StatelessWidget {
           }),
       title: Text(
         task.title,
+        overflow: TextOverflow.ellipsis,
         style: TextStyle(
             decoration: task.isDone! ? TextDecoration.lineThrough : null),
       ),
@@ -39,7 +40,7 @@ class ListItem extends StatelessWidget {
           children: [
             IconButton(onPressed: () {}, icon: Icon(Icons.favorite)),
             IconButton(
-                onPressed: () {},
+                onPressed: () => _removeOrDeleteTask(context, task),
                 icon: Icon(
                   Icons.delete,
                   color: Color(0xFFFF7900),
@@ -47,7 +48,6 @@ class ListItem extends StatelessWidget {
           ],
         ),
       ),
-      onLongPress: () => _removeOrDeleteTask(context, task),
     );
   }
 }

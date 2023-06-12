@@ -10,17 +10,27 @@ class TaskList extends StatelessWidget {
   });
 
   final List<Task> taskList;
-
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: ListView.builder(
-        itemCount: taskList.length,
-        itemBuilder: (context, i) {
-          final task = taskList[i];
-          return ListItem(task: task);
-        },
-      ),
-    );
+    return ExpansionPanelList.radio(
+        children: taskList
+            .map(
+              (task) => ExpansionPanelRadio(
+                  value: task.id,
+                  headerBuilder: (context, isExpanded) => ListItem(task: task),
+                  body: const Text('data')),
+            )
+            .toList());
   }
 }
+
+
+// Expanded(
+//       child: ListView.builder(
+//         itemCount: taskList.length,
+//         itemBuilder: (context, i) {
+//           final task = taskList[i];
+//           return ListItem(task: task);
+//         },
+//       ),
+//     );

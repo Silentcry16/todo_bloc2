@@ -11,6 +11,7 @@ class TasksBloc extends HydratedBloc<TasksEvent, TasksState> {
     on<UpdateTask>(_onUpdateTask);
     on<DeleteTask>(_onDeleteTask);
     on<RemoveTask>(_onRemoveTask);
+    on<DeleteAllTask>(_onDeleteAllTask);
   }
 
   void _onAddTask(AddTask event, Emitter<TasksState> emit) {
@@ -72,6 +73,18 @@ class TasksBloc extends HydratedBloc<TasksEvent, TasksState> {
           favoriteTasks: List.from(state.favoriteTasks)..remove(event.task),
           removedTasks: List.from(state.removedTasks)
             ..add(event.task.copyWith(isDeleted: true))),
+    );
+  }
+
+  void _onDeleteAllTask(DeleteAllTask event, Emitter<TasksState> emit) async {
+    final state = this.state;
+
+    emit(
+      TasksState(
+          pendingTasks: state.pendingTasks,
+          completedTasks: state.completedTasks,
+          favoriteTasks: state.favoriteTasks,
+          removedTasks: []),
     );
   }
 

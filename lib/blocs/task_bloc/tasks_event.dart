@@ -42,3 +42,6 @@ class DeleteTask extends TasksEvent {
   @override
   List<Object> get props => [task];
 }
+
+//Delete All tasks from RemovedList!!
+class DeleteAllTask extends TasksEvent {}

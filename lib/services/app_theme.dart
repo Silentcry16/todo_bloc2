@@ -67,7 +67,10 @@ class AppThemes {
       primaryColor: Colors.white,
       brightness: Brightness.light,
       dividerColor: const Color(0xFF757575),
-      appBarTheme: const AppBarTheme(color: Color(0xFF7B2CBF)),
+      appBarTheme: const AppBarTheme(
+        color: Color(0xFF7B2CBF),
+        foregroundColor: Colors.white,
+      ),
       floatingActionButtonTheme: const FloatingActionButtonThemeData(
           backgroundColor: Color(0XFF7b2cbf), foregroundColor: Colors.white),
       textButtonTheme: TextButtonThemeData(

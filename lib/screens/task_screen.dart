@@ -13,6 +13,7 @@ class TaskScreen extends StatelessWidget {
   void _addTask(BuildContext context) {
     showModalBottomSheet(
       context: context,
+      isScrollControlled: true,
       builder: (context) {
         return SingleChildScrollView(
           child: Container(

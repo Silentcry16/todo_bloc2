@@ -60,7 +60,7 @@ class CustomDrawer extends StatelessWidget {
                       Navigator.of(context).pushReplacementNamed(HomeScreen.id),
                   child: ListTile(
                     leading: const Icon(Icons.list),
-                    title: const Text('Home'),
+                    title: const Text('Tasks'),
                     trailing: Text(
                         '${state.pendingTasks.length}  | ${state.completedTasks.length} '),
                   ),
