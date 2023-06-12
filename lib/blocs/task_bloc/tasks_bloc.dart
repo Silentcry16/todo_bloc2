@@ -29,22 +29,38 @@ class TasksBloc extends HydratedBloc<TasksEvent, TasksState> {
   void _onUpdateTask(UpdateTask event, Emitter<TasksState> emit) {
     final state = this.state;
     final task = event.task;
-    final int index = state.pendingTasks.indexOf(task);
-    //creating new taskList and removing the old task
-    List<Task> allTask = List.from(state.pendingTasks)..remove(task);
+
+    List<Task> pendingTasks = state.pendingTasks;
+    List<Task> completedtasks = state.completedTasks;
 
     task.isDone == false
-        ? allTask.insert(index, task.copyWith(isDone: true))
-        : allTask.insert(index, task.copyWith(isDone: false));
+        ? {
+            pendingTasks = List.from(pendingTasks)..remove(task),
+            completedtasks = List.from(completedtasks)
+              ..insert(0, task.copyWith(isDone: true))
+          }
+        : {
+            completedtasks = List.from(completedtasks)..remove(task),
+            pendingTasks = List.from(pendingTasks)
+              ..insert(0, task.copyWith(isDone: false))
+          };
 
-    emit(TasksState(pendingTasks: allTask, removedTasks: state.removedTasks));
+    emit(TasksState(
+        removedTasks: state.removedTasks,
+        completedTasks: completedtasks,
+        favoriteTasks: state.favoriteTasks,
+        pendingTasks: pendingTasks));
   }
 
   void _onDeleteTask(DeleteTask event, Emitter<TasksState> emit) {
     final state = this.state;
-    emit(TasksState(
-        pendingTasks: state.pendingTasks,
-        removedTasks: List.from(state.removedTasks)..remove(event.task)));
+    emit(
+      TasksState(
+          pendingTasks: state.pendingTasks,
+          completedTasks: state.completedTasks,
+          favoriteTasks: state.favoriteTasks,
+          removedTasks: List.from(state.removedTasks)..remove(event.task)),
+    );
   }
 
   void _onRemoveTask(RemoveTask event, Emitter<TasksState> emit) {
@@ -52,6 +68,8 @@ class TasksBloc extends HydratedBloc<TasksEvent, TasksState> {
     emit(
       TasksState(
           pendingTasks: List.from(state.pendingTasks)..remove(event.task),
+          completedTasks: List.from(state.completedTasks)..remove(event.task),
+          favoriteTasks: List.from(state.favoriteTasks)..remove(event.task),
           removedTasks: List.from(state.removedTasks)
             ..add(event.task.copyWith(isDeleted: true))),
     );

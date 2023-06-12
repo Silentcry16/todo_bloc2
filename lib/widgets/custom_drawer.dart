@@ -61,7 +61,8 @@ class CustomDrawer extends StatelessWidget {
                   child: ListTile(
                     leading: const Icon(Icons.list),
                     title: const Text('Home'),
-                    trailing: Text('${state.pendingTasks.length}'),
+                    trailing: Text(
+                        '${state.pendingTasks.length}  | ${state.completedTasks.length} '),
                   ),
                 ),
                 const Divider(),
