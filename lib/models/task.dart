@@ -17,9 +17,11 @@ class Task extends Equatable {
     required this.regDate,
     this.isDone,
     this.isDeleted,
+    this.isFavorite,
   }) {
     isDone = isDone ?? false;
     isDeleted = isDeleted ?? false;
+    isFavorite = isFavorite ?? false;
   }
 
   Task copyWith({
@@ -29,6 +31,7 @@ class Task extends Equatable {
     String? regDate,
     bool? isDone,
     bool? isDeleted,
+    bool? isFavorite,
   }) {
     return Task(
       id: id ?? this.id,
@@ -37,6 +40,7 @@ class Task extends Equatable {
       regDate: regDate ?? this.regDate,
       isDone: isDone ?? this.isDone,
       isDeleted: isDeleted ?? this.isDeleted,
+      isFavorite: isFavorite ?? this.isFavorite,
     );
   }
 
@@ -48,6 +52,7 @@ class Task extends Equatable {
       'regDate': regDate,
       'isDone': isDone,
       'isDeleted': isDeleted,
+      'isFavorite': isFavorite,
     };
   }
 
@@ -59,10 +64,11 @@ class Task extends Equatable {
       regDate: map['regDate'] ?? '',
       isDone: map['isDone'],
       isDeleted: map['isDeleted'],
+      isFavorite: map['isFavorite'],
     );
   }
 
   @override
   List<Object?> get props =>
-      [id, title, description, regDate, isDone, isDeleted];
+      [id, title, description, isFavorite, regDate, isDone, isDeleted];
 }

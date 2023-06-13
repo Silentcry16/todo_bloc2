@@ -8,37 +8,46 @@ abstract class TasksEvent extends Equatable {
 }
 
 //Adds the Tasks to the allTasks!!
-class AddTask extends TasksEvent {
+class AddTaskEvent extends TasksEvent {
   final Task task;
 
-  const AddTask({required this.task});
+  const AddTaskEvent({required this.task});
   @override
   List<Object> get props => [task];
 }
 
 //Marks Events as Done or UnDone!!
-class UpdateTask extends TasksEvent {
+class UpdateTaskEvent extends TasksEvent {
   final Task task;
 
-  const UpdateTask({required this.task});
+  const UpdateTaskEvent({required this.task});
   @override
   List<Object> get props => [task];
 }
 
 //Adds the Tasks to the RemovedList!!
-class RemoveTask extends TasksEvent {
+class RemoveTaskEvent extends TasksEvent {
   final Task task;
 
-  const RemoveTask({required this.task});
+  const RemoveTaskEvent({required this.task});
   @override
   List<Object> get props => [task];
 }
 
 //Delete selected tasks from RemovedList!!
-class DeleteTask extends TasksEvent {
+class DeleteTaskEvent extends TasksEvent {
   final Task task;
 
-  const DeleteTask({required this.task});
+  const DeleteTaskEvent({required this.task});
+  @override
+  List<Object> get props => [task];
+}
+
+//Delete selected tasks from RemovedList!!
+class isfavoriteTaskEvent extends TasksEvent {
+  final Task task;
+
+  const isfavoriteTaskEvent({required this.task});
   @override
   List<Object> get props => [task];
 }

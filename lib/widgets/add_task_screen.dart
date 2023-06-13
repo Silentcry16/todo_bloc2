@@ -73,7 +73,9 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                               title: titleController.text,
                               regDate: DateTime.now().toString(),
                               description: descriptionController.text);
-                          context.read<TasksBloc>().add(AddTask(task: task));
+                          context
+                              .read<TasksBloc>()
+                              .add(AddTaskEvent(task: task));
                           Navigator.of(context).pop();
                           titleController.clear();
                           descriptionController.clear();

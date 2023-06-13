@@ -7,14 +7,15 @@ part 'tasks_state.dart';
 
 class TasksBloc extends HydratedBloc<TasksEvent, TasksState> {
   TasksBloc() : super(const TasksState()) {
-    on<AddTask>(_onAddTask);
-    on<UpdateTask>(_onUpdateTask);
-    on<DeleteTask>(_onDeleteTask);
-    on<RemoveTask>(_onRemoveTask);
+    on<AddTaskEvent>(_onAddTask);
+    on<UpdateTaskEvent>(_onUpdateTask);
+    on<DeleteTaskEvent>(_onDeleteTask);
+    on<RemoveTaskEvent>(_onRemoveTask);
     on<DeleteAllTask>(_onDeleteAllTask);
+    on<isfavoriteTaskEvent>(_onIsFavoriteTask);
   }
 
-  void _onAddTask(AddTask event, Emitter<TasksState> emit) {
+  void _onAddTask(AddTaskEvent event, Emitter<TasksState> emit) {
     final state = this.state;
     emit(
       TasksState(
@@ -27,7 +28,7 @@ class TasksBloc extends HydratedBloc<TasksEvent, TasksState> {
     );
   }
 
-  void _onUpdateTask(UpdateTask event, Emitter<TasksState> emit) {
+  void _onUpdateTask(UpdateTaskEvent event, Emitter<TasksState> emit) {
     final state = this.state;
     final task = event.task;
 
@@ -53,7 +54,7 @@ class TasksBloc extends HydratedBloc<TasksEvent, TasksState> {
         pendingTasks: pendingTasks));
   }
 
-  void _onDeleteTask(DeleteTask event, Emitter<TasksState> emit) {
+  void _onDeleteTask(DeleteTaskEvent event, Emitter<TasksState> emit) {
     final state = this.state;
     emit(
       TasksState(
@@ -64,7 +65,7 @@ class TasksBloc extends HydratedBloc<TasksEvent, TasksState> {
     );
   }
 
-  void _onRemoveTask(RemoveTask event, Emitter<TasksState> emit) {
+  void _onRemoveTask(RemoveTaskEvent event, Emitter<TasksState> emit) {
     final state = this.state;
     emit(
       TasksState(
@@ -85,6 +86,54 @@ class TasksBloc extends HydratedBloc<TasksEvent, TasksState> {
           completedTasks: state.completedTasks,
           favoriteTasks: state.favoriteTasks,
           removedTasks: const []),
+    );
+  }
+
+  void _onIsFavoriteTask(
+      isfavoriteTaskEvent event, Emitter<TasksState> emit) async {
+    final state = this.state;
+    final task = event.task;
+
+    List<Task> pendingTasks = state.pendingTasks;
+    List<Task> completedTasks = state.completedTasks;
+    List<Task> favoriteTasks = state.favoriteTasks;
+
+    if (task.isDone == false) {
+      if (task.isFavorite == false) {
+        final taskIndex = pendingTasks.indexOf(task);
+        pendingTasks = List.from(pendingTasks)
+          ..remove(task)
+          ..insert(taskIndex, task.copyWith(isFavorite: true));
+        favoriteTasks.insert(0, task.copyWith(isFavorite: true));
+      } else {
+        final taskIndex = pendingTasks.indexOf(task);
+        pendingTasks = List.from(pendingTasks)
+          ..remove(task)
+          ..insert(taskIndex, task.copyWith(isFavorite: false));
+        favoriteTasks.remove(task);
+      }
+    } else if (task.isDone == true) {
+      if (task.isFavorite == false) {
+        final taskIndex = completedTasks.indexOf(task);
+        completedTasks = List.from(completedTasks)
+          ..remove(task)
+          ..insert(taskIndex, task.copyWith(isFavorite: true));
+        favoriteTasks.insert(0, task.copyWith(isFavorite: true));
+      } else {
+        final taskIndex = completedTasks.indexOf(task);
+        completedTasks = List.from(completedTasks)
+          ..remove(task)
+          ..insert(taskIndex, task.copyWith(isFavorite: false));
+        favoriteTasks.remove(task);
+      }
+    }
+
+    emit(
+      TasksState(
+          pendingTasks: pendingTasks,
+          completedTasks: completedTasks,
+          favoriteTasks: favoriteTasks,
+          removedTasks: state.removedTasks),
     );
   }
 
