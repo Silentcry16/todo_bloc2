@@ -8,80 +8,75 @@ import '../blocs/bloc_exports.dart';
 class PopUpMenu extends StatelessWidget {
   const PopUpMenu({
     Key? key,
-    required this.cancelOrDeleteCallBack,
-    required this.isFavoriteCallBack,
     required this.task,
   }) : super(key: key);
 
-  final VoidCallback cancelOrDeleteCallBack;
-  final VoidCallback isFavoriteCallBack;
   final Task task;
 
   @override
   Widget build(BuildContext context) {
     return task.isDeleted == false
-        ? PopupMenuButton(
-            itemBuilder: (context) => [
-              PopupMenuItem(
-                child: TextButton.icon(
-                  style: ButtonStyle(
-                      foregroundColor: MaterialStateProperty.all(Colors.black)),
-                  onPressed: () {},
-                  icon: const Icon(Icons.edit),
-                  label: const Text('Edit'),
-                ),
-              ),
-              PopupMenuItem(
-                child: TextButton.icon(
-                  style: ButtonStyle(
-                      foregroundColor: MaterialStateProperty.all(Colors.black)),
-                  onPressed: () {
-                    isFavoriteCallBack();
-                  },
-                  icon: task.isFavorite == false
-                      ? const Icon(Icons.bookmark_add_outlined)
-                      : const Icon(Icons.bookmark_add),
-                  label: task.isFavorite == false
-                      ? const Text('Add to bookmark ')
-                      : const Text('Remove from bookmark '),
-                ),
-              ),
-              PopupMenuItem(
-                child: TextButton.icon(
-                  style: ButtonStyle(
-                      foregroundColor: MaterialStateProperty.all(Colors.black)),
-                  onPressed: () {
-                    cancelOrDeleteCallBack();
-                  },
-                  icon: const Icon(Icons.delete),
-                  label: const Text('Delete'),
-                ),
-              ),
-            ],
+        ? BlocBuilder<SwitchBloc, SwitchState>(
+            builder: (context, state) {
+              return PopupMenuButton(
+                itemBuilder: (context) => [
+                  PopupMenuItem(
+                    onTap: () {},
+                    child: const ListTile(
+                      leading: Icon(Icons.edit),
+                      title: Text('Edit'),
+                    ),
+                  ),
+                  PopupMenuItem(
+                    onTap: () => context
+                        .read<TasksBloc>()
+                        .add(IsfavoriteTaskEvent(task: task)),
+                    child: ListTile(
+                      leading: task.isFavorite == false
+                          ? const Icon(Icons.bookmark_add_outlined)
+                          : const Icon(Icons.bookmark),
+                      title: task.isFavorite == false
+                          ? const Text('Add to bookmark')
+                          : const Text('Remove from bookmarks'),
+                    ),
+                  ),
+                  PopupMenuItem(
+                    onTap: () => context
+                        .read<TasksBloc>()
+                        .add(RemoveTaskEvent(task: task)),
+                    child: const ListTile(
+                      leading: Icon(Icons.remove),
+                      title: Text('Remove'),
+                    ),
+                  ),
+                ],
+              );
+            },
           )
-        : PopupMenuButton(
-            itemBuilder: (context) => [
-              PopupMenuItem(
-                child: TextButton.icon(
-                  style: ButtonStyle(
-                      foregroundColor: MaterialStateProperty.all(Colors.black)),
-                  onPressed: () => context
-                      .read<TasksBloc>()
-                      .add(RestoreTaskEvent(task: task)),
-                  icon: const Icon(Icons.undo),
-                  label: const Text('Restore'),
-                ),
-              ),
-              PopupMenuItem(
-                child: TextButton.icon(
-                  style: ButtonStyle(
-                      foregroundColor: MaterialStateProperty.all(Colors.black)),
-                  onPressed: cancelOrDeleteCallBack,
-                  icon: const Icon(Icons.delete_forever),
-                  label: const Text('Delete Forever'),
-                ),
-              ),
-            ],
+        : BlocBuilder<SwitchBloc, SwitchState>(
+            builder: (context, state) {
+              return PopupMenuButton(
+                itemBuilder: (context) => [
+                  PopupMenuItem(
+                      onTap: () => context
+                          .read<TasksBloc>()
+                          .add(RestoreTaskEvent(task: task)),
+                      child: const ListTile(
+                        leading: Icon(Icons.restart_alt_rounded),
+                        title: Text('Restore'),
+                      )),
+                  PopupMenuItem(
+                    onTap: () => context
+                        .read<TasksBloc>()
+                        .add(DeleteTaskEvent(task: task)),
+                    child: const ListTile(
+                      leading: Icon(Icons.delete_forever),
+                      title: Text('Delete forever'),
+                    ),
+                  ),
+                ],
+              );
+            },
           );
   }
 }

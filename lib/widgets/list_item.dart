@@ -13,12 +13,6 @@ class ListItem extends StatelessWidget {
 
   final Task task;
 
-  void _removeOrDeleteTask(BuildContext ctx, Task task) {
-    task.isDeleted!
-        ? ctx.read<TasksBloc>().add(DeleteTaskEvent(task: task))
-        : ctx.read<TasksBloc>().add(RemoveTaskEvent(task: task));
-  }
-
   @override
   Widget build(BuildContext context) {
     return ListTile(
@@ -43,20 +37,15 @@ class ListItem extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             Checkbox(
-                fillColor: MaterialStateProperty.all(Color(0xFFFF9E00)),
-                value: task.isDone,
-                onChanged: (val) {
-                  context.read<TasksBloc>().add(UpdateTaskEvent(task: task));
-                }),
+              fillColor: MaterialStateProperty.all(
+                  Theme.of(context).appBarTheme.backgroundColor),
+              value: task.isDone,
+              onChanged: (val) {
+                context.read<TasksBloc>().add(UpdateTaskEvent(task: task));
+              },
+            ),
             PopUpMenu(
               task: task,
-              cancelOrDeleteCallBack: () {
-                _removeOrDeleteTask(context, task);
-                Navigator.of(context).pop();
-              },
-              isFavoriteCallBack: () => context
-                  .read<TasksBloc>()
-                  .add(IsfavoriteTaskEvent(task: task)),
             ),
           ],
         ),
