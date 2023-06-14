@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:todo_bloc2/models/task.dart';
+import 'package:todo_bloc2/widgets/edit_task.dart';
 
 import '../blocs/bloc_exports.dart';
 
@@ -13,6 +14,24 @@ class PopUpMenu extends StatelessWidget {
 
   final Task task;
 
+  void editTask(BuildContext ctx) {
+    print('Edit option tapped!');
+    showModalBottomSheet(
+      context: ctx,
+      isScrollControlled: true,
+      builder: (context) {
+        return SingleChildScrollView(
+          child: Container(
+              padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).viewInsets.bottom),
+              child: EditTask(
+                oldtask: task,
+              )),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return task.isDeleted == false
@@ -21,10 +40,12 @@ class PopUpMenu extends StatelessWidget {
               return PopupMenuButton(
                 itemBuilder: (context) => [
                   PopupMenuItem(
-                    onTap: () {},
-                    child: const ListTile(
-                      leading: Icon(Icons.edit),
-                      title: Text('Edit'),
+                    child: InkWell(
+                      onTap: () => editTask(context),
+                      child: ListTile(
+                        leading: Icon(Icons.edit),
+                        title: Text('Edit'),
+                      ),
                     ),
                   ),
                   PopupMenuItem(

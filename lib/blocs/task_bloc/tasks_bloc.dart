@@ -14,6 +14,7 @@ class TasksBloc extends HydratedBloc<TasksEvent, TasksState> {
     on<DeleteAllTask>(_onDeleteAllTask);
     on<IsfavoriteTaskEvent>(_onIsFavoriteTask);
     on<RestoreTaskEvent>(_onRestoreTask);
+    on<EditTaskEvent>(_onEditTask);
   }
 
   void _onAddTask(AddTaskEvent event, Emitter<TasksState> emit) {
@@ -154,6 +155,28 @@ class TasksBloc extends HydratedBloc<TasksEvent, TasksState> {
         completedTasks: state.completedTasks,
         favoriteTasks: state.favoriteTasks,
       ),
+    );
+  }
+
+  void _onEditTask(EditTaskEvent event, Emitter<TasksState> emit) {
+    final state = this.state;
+    List<Task> favoriteTasks = state.favoriteTasks;
+//keep the bookmark of the task
+    if (event.newTask.isFavorite == true) {
+      favoriteTasks
+        ..remove(event.oldTask)
+        ..insert(0, event.newTask);
+    }
+    emit(
+      TasksState(
+          //add edited task only in pending tasks, because it's actually a new task added
+          pendingTasks: List.from(state.pendingTasks)
+            ..remove(event.oldTask)
+            ..insert(0, event.newTask),
+          //if the old task marks as isDone and we edit it, the old task removes from the Completed list.
+          completedTasks: state.completedTasks..remove(event.oldTask),
+          favoriteTasks: favoriteTasks,
+          removedTasks: state.removedTasks),
     );
   }
 
