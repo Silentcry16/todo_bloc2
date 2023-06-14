@@ -35,14 +35,14 @@ class PopUpMenu extends StatelessWidget {
                       foregroundColor: MaterialStateProperty.all(Colors.black)),
                   onPressed: () {
                     isFavoriteCallBack();
-                    Navigator.of(context).pop();
+                    // Navigator.of(context).pop();
                   },
                   icon: task.isFavorite == false
                       ? const Icon(Icons.bookmark_add_outlined)
                       : const Icon(Icons.bookmark_add),
                   label: task.isFavorite == false
-                      ? const Text('Save')
-                      : const Text('Saved'),
+                      ? const Text('Add to bookmark ')
+                      : const Text('Remove from bookmark '),
                 ),
               ),
               PopupMenuItem(

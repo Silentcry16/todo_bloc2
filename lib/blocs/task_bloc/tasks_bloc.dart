@@ -130,12 +130,61 @@ class TasksBloc extends HydratedBloc<TasksEvent, TasksState> {
 
     emit(
       TasksState(
-          pendingTasks: pendingTasks,
-          completedTasks: completedTasks,
-          favoriteTasks: favoriteTasks,
-          removedTasks: state.removedTasks),
+        pendingTasks: pendingTasks,
+        completedTasks: completedTasks,
+        favoriteTasks: favoriteTasks,
+        removedTasks: state.removedTasks,
+      ),
     );
   }
+
+  // void _onIsFavoriteTask(
+  //     isfavoriteTaskEvent event, Emitter<TasksState> emit) async {
+  //   final state = this.state;
+  //   final task = event.task;
+
+  //   List<Task> pendingTasks = state.pendingTasks;
+  //   List<Task> completedTasks = state.completedTasks;
+  //   List<Task> favoriteTasks = state.favoriteTasks;
+
+  //   if (task.isDone == false) {
+  //     if (task.isFavorite == false) {
+  //       final taskIndex = pendingTasks.indexOf(task);
+  //       pendingTasks = List.from(pendingTasks)
+  //         ..remove(task)
+  //         ..insert(taskIndex, task.copyWith(isFavorite: true));
+  //       favoriteTasks.insert(0, task.copyWith(isFavorite: true));
+  //     } else {
+  //       final taskIndex = pendingTasks.indexOf(task);
+  //       pendingTasks = List.from(pendingTasks)
+  //         ..remove(task)
+  //         ..insert(taskIndex, task.copyWith(isFavorite: false));
+  //       favoriteTasks.remove(task);
+  //     }
+  //   } else if (task.isDone == true) {
+  //     if (task.isFavorite == false) {
+  //       final taskIndex = completedTasks.indexOf(task);
+  //       completedTasks = List.from(completedTasks)
+  //         ..remove(task)
+  //         ..insert(taskIndex, task.copyWith(isFavorite: true));
+  //       favoriteTasks.insert(0, task.copyWith(isFavorite: true));
+  //     } else {
+  //       final taskIndex = completedTasks.indexOf(task);
+  //       completedTasks = List.from(completedTasks)
+  //         ..remove(task)
+  //         ..insert(taskIndex, task.copyWith(isFavorite: false));
+  //       favoriteTasks.remove(task);
+  //     }
+  //   }
+
+  //   emit(
+  //     TasksState(
+  //         pendingTasks: pendingTasks,
+  //         completedTasks: completedTasks,
+  //         favoriteTasks: favoriteTasks,
+  //         removedTasks: state.removedTasks),
+  //   );
+  // }
 
   @override
   TasksState? fromJson(Map<String, dynamic> json) {

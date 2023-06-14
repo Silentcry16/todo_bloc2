@@ -50,7 +50,10 @@ class ListItem extends StatelessWidget {
                 }),
             PopUpMenu(
               task: task,
-              cancelOrDeleteCallBack: () => _removeOrDeleteTask(context, task),
+              cancelOrDeleteCallBack: () {
+                _removeOrDeleteTask(context, task);
+                Navigator.of(context).pop();
+              },
               isFavoriteCallBack: () => context
                   .read<TasksBloc>()
                   .add(isfavoriteTaskEvent(task: task)),
