@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 
 import 'package:todo_bloc2/models/task.dart';
 
+import '../blocs/bloc_exports.dart';
+
 class PopUpMenu extends StatelessWidget {
   const PopUpMenu({
     Key? key,
@@ -35,7 +37,6 @@ class PopUpMenu extends StatelessWidget {
                       foregroundColor: MaterialStateProperty.all(Colors.black)),
                   onPressed: () {
                     isFavoriteCallBack();
-                    // Navigator.of(context).pop();
                   },
                   icon: task.isFavorite == false
                       ? const Icon(Icons.bookmark_add_outlined)
@@ -51,7 +52,6 @@ class PopUpMenu extends StatelessWidget {
                       foregroundColor: MaterialStateProperty.all(Colors.black)),
                   onPressed: () {
                     cancelOrDeleteCallBack();
-                    Navigator.of(context).pop();
                   },
                   icon: const Icon(Icons.delete),
                   label: const Text('Delete'),
@@ -65,7 +65,9 @@ class PopUpMenu extends StatelessWidget {
                 child: TextButton.icon(
                   style: ButtonStyle(
                       foregroundColor: MaterialStateProperty.all(Colors.black)),
-                  onPressed: () {},
+                  onPressed: () => context
+                      .read<TasksBloc>()
+                      .add(RestoreTaskEvent(task: task)),
                   icon: const Icon(Icons.undo),
                   label: const Text('Restore'),
                 ),

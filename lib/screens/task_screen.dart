@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:todo_bloc2/models/task.dart';
 
@@ -26,6 +28,7 @@ class TaskScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    log(1);
     return BlocBuilder<TasksBloc, TasksState>(
       builder: (context, state) {
         List<Task> taskList = state.pendingTasks;

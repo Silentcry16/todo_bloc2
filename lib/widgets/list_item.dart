@@ -56,8 +56,8 @@ class ListItem extends StatelessWidget {
               },
               isFavoriteCallBack: () => context
                   .read<TasksBloc>()
-                  .add(isfavoriteTaskEvent(task: task)),
-            )
+                  .add(IsfavoriteTaskEvent(task: task)),
+            ),
           ],
         ),
       ),
