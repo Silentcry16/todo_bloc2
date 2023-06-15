@@ -5,12 +5,12 @@ part of 'tasks_bloc.dart';
 class TasksState extends Equatable {
   final List<Task> pendingTasks;
   final List<Task> completedTasks;
-  final List<Task> favoriteTasks;
+  // final List<Task> favoriteTasks;
   final List<Task> removedTasks;
   const TasksState({
     this.pendingTasks = const <Task>[],
     this.completedTasks = const <Task>[],
-    this.favoriteTasks = const <Task>[],
+    // this.favoriteTasks = const <Task>[],
     this.removedTasks = const <Task>[],
   });
 
@@ -25,7 +25,7 @@ class TasksState extends Equatable {
     return <String, dynamic>{
       'pendingTasks': pendingTasks.map((x) => x.toMap()).toList(),
       'completedTasks': completedTasks.map((x) => x.toMap()).toList(),
-      'favoriteTasks': favoriteTasks.map((x) => x.toMap()).toList(),
+      // 'favoriteTasks': favoriteTasks.map((x) => x.toMap()).toList(),
       'removedTasks': removedTasks.map((x) => x.toMap()).toList(),
     };
   }
@@ -42,11 +42,11 @@ class TasksState extends Equatable {
           (x) => Task.fromMap(x as Map<String, dynamic>),
         ),
       ),
-      favoriteTasks: List<Task>.from(
-        (map['favoriteTasks']).map<Task>(
-          (x) => Task.fromMap(x as Map<String, dynamic>),
-        ),
-      ),
+      // favoriteTasks: List<Task>.from(
+      //   (map['favoriteTasks']).map<Task>(
+      //     (x) => Task.fromMap(x as Map<String, dynamic>),
+      //   ),
+      // ),
       removedTasks: List<Task>.from(
         (map['removedTasks']).map<Task>(
           (x) => Task.fromMap(x as Map<String, dynamic>),

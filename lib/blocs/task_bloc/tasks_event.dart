@@ -43,16 +43,16 @@ class DeleteTaskEvent extends TasksEvent {
   List<Object> get props => [task];
 }
 
-//Adds a task to favoriteTasks list!!
-class IsfavoriteTaskEvent extends TasksEvent {
-  final Task task;
+// //Adds a task to favoriteTasks list!!
+// class IsfavoriteTaskEvent extends TasksEvent {
+//   final Task task;
 
-  const IsfavoriteTaskEvent({required this.task});
-  @override
-  List<Object> get props => [task];
-}
+//   const IsfavoriteTaskEvent({required this.task});
+//   @override
+//   List<Object> get props => [task];
+// }
 
-//Adds a task to favoriteTasks list!!
+//restore the task from Recycle Bin!!
 class RestoreTaskEvent extends TasksEvent {
   final Task task;
 

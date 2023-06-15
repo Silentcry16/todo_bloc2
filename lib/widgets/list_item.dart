@@ -16,12 +16,12 @@ class ListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: task.isFavorite == false
-          ? Icon(Icons.star_border)
-          : Icon(
-              Icons.star,
-              color: Colors.orange,
-            ),
+      leading: CircleAvatar(
+          backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+          child: Icon(
+            Icons.timer_outlined,
+            color: Theme.of(context).appBarTheme.foregroundColor,
+          )),
       title: Text(
         task.title,
         overflow: TextOverflow.ellipsis,
@@ -30,7 +30,7 @@ class ListItem extends StatelessWidget {
       ),
       subtitle: Text(DateFormat('MMM dd, yyyy - HH:mm')
           .format(DateTime.parse(task.regDate))),
-      trailing: Container(
+      trailing: SizedBox(
         // color: Colors.amber,
         width: 110,
         child: Row(

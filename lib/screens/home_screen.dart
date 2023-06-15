@@ -1,7 +1,6 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:flutter/material.dart';
-import 'package:todo_bloc2/screens/favorite_tasks_screen.dart';
 import 'package:todo_bloc2/screens/task_screen.dart';
 
 import '../blocs/bloc_exports.dart';
@@ -21,7 +20,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final GlobalKey<NavigatorState> _taskScreenKey = GlobalKey();
   final GlobalKey<NavigatorState> _completedScreenKey = GlobalKey();
-  final GlobalKey<NavigatorState> _favoriteScreenKey = GlobalKey();
+  // final GlobalKey<NavigatorState> _favoriteScreenKey = GlobalKey();
   int currentIndex = 0;
   @override
   Widget build(BuildContext context) {
@@ -32,11 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: currentIndex == BottomNavIndex.tasksIndex
             ? const Text('Todo')
-            : currentIndex == BottomNavIndex.completedIndex
-                ? const Text('Completed')
-                : currentIndex == BottomNavIndex.favoriteIndex
-                    ? const Text('Favorite')
-                    : null,
+            : const Text('Completed'),
         actions: [
           currentIndex == BottomNavIndex.tasksIndex
               ? IconButton(
@@ -60,19 +55,19 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   Navigator(
                     key: _taskScreenKey,
-                    onGenerateRoute: (settings) => MaterialPageRoute(
-                        builder: (context) => const TaskScreen()),
+                    onGenerateRoute: (settings) =>
+                        MaterialPageRoute(builder: (context) => TaskScreen()),
                   ),
                   Navigator(
                     key: _completedScreenKey,
                     onGenerateRoute: (settings) => MaterialPageRoute(
                         builder: (context) => const CompletedTasksScreen()),
                   ),
-                  Navigator(
-                    key: _favoriteScreenKey,
-                    onGenerateRoute: (settings) => MaterialPageRoute(
-                        builder: (context) => const FavoriteTasksScreen()),
-                  ),
+                  // Navigator(
+                  //   key: _favoriteScreenKey,
+                  //   onGenerateRoute: (settings) => MaterialPageRoute(
+                  //       builder: (context) => const FavoriteTasksScreen()),
+                  // ),
                 ],
               ),
             ),
@@ -167,36 +162,36 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),
-              Expanded(
-                child: Column(
-                  children: [
-                    IconButton(
-                        onPressed: () {
-                          setState(() {
-                            currentIndex = BottomNavIndex.favoriteIndex;
-                          });
-                        },
-                        icon: currentIndex == BottomNavIndex.favoriteIndex
-                            ? const Icon(
-                                Icons.favorite,
-                                color: Colors.white,
-                                size: 35,
-                              )
-                            : const Icon(
-                                Icons.favorite,
-                                color: Colors.white70,
-                                size: 30,
-                              )),
-                    currentIndex == BottomNavIndex.favoriteIndex
-                        ? Container(
-                            height: 3,
-                            decoration:
-                                const BoxDecoration(color: Colors.white),
-                          )
-                        : const SizedBox.shrink(),
-                  ],
-                ),
-              ),
+              // Expanded(
+              //   child: Column(
+              //     children: [
+              //       IconButton(
+              //           onPressed: () {
+              //             setState(() {
+              //               currentIndex = BottomNavIndex.favoriteIndex;
+              //             });
+              //           },
+              //           icon: currentIndex == BottomNavIndex.favoriteIndex
+              //               ? const Icon(
+              //                   Icons.favorite,
+              //                   color: Colors.white,
+              //                   size: 35,
+              //                 )
+              //               : const Icon(
+              //                   Icons.favorite,
+              //                   color: Colors.white70,
+              //                   size: 30,
+              //                 )),
+              //       currentIndex == BottomNavIndex.favoriteIndex
+              //           ? Container(
+              //               height: 3,
+              //               decoration:
+              //                   const BoxDecoration(color: Colors.white),
+              //             )
+              //           : const SizedBox.shrink(),
+              //     ],
+              //   ),
+              // ),
             ],
           ),
         );
@@ -209,5 +204,5 @@ class BottomNavIndex {
   BottomNavIndex._();
   static const int tasksIndex = 0;
   static const int completedIndex = 1;
-  static const int favoriteIndex = 2;
+  // static const int favoriteIndex = 2;
 }

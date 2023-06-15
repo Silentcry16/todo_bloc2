@@ -30,7 +30,8 @@ class AppThemes {
 
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          foregroundColor: Colors.white, backgroundColor: Colors.grey, // Set the text color
+          foregroundColor: Colors.white,
+          backgroundColor: Colors.grey, // Set the text color
           elevation: 5, // Set the button elevation
           shape: RoundedRectangleBorder(
             borderRadius:
@@ -91,7 +92,8 @@ class AppThemes {
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          foregroundColor: Colors.white, backgroundColor: const Color(0xFF7B2CBF), // Set the text color
+          foregroundColor: Colors.white,
+          backgroundColor: const Color(0xFF7B2CBF), // Set the text color
           elevation: 5, // Set the button elevation
           shape: RoundedRectangleBorder(
             borderRadius:
