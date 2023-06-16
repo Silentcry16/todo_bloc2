@@ -8,13 +8,9 @@ class TaskList extends StatelessWidget {
   const TaskList({
     super.key,
     required this.taskList,
-    required this.ontap,
-    this.task,
   });
 
   final List<Task> taskList;
-  final Task? task;
-  final VoidCallback ontap;
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -55,28 +51,6 @@ class TaskList extends StatelessWidget {
                       ),
                     )
                     .toList()),
-            task!.isDone == false
-                ? BlocBuilder<SwitchBloc, SwitchState>(
-                    builder: (context, state) {
-                      return TextButton.icon(
-                        onPressed: ontap,
-                        icon: Icon(
-                          Icons.add,
-                          color: state.switchValue == false
-                              ? Colors.black
-                              : Colors.white,
-                        ),
-                        label: AppText(
-                          text: 'Add new Task',
-                          weight: FontWeight.bold,
-                          color: state.switchValue == false
-                              ? Colors.black
-                              : Colors.white,
-                        ),
-                      );
-                    },
-                  )
-                : const SizedBox.shrink(),
           ],
         ),
       ),

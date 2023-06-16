@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:todo_bloc2/widgets/app_text.dart';
 import 'package:todo_bloc2/widgets/pop_up_menu.dart';
 
 import '../blocs/bloc_exports.dart';
@@ -22,12 +23,10 @@ class ListItem extends StatelessWidget {
             Icons.timer_outlined,
             color: Theme.of(context).appBarTheme.foregroundColor,
           )),
-      title: Text(
-        task.title,
-        overflow: TextOverflow.ellipsis,
-        style: TextStyle(
-            decoration: task.isDone! ? TextDecoration.lineThrough : null),
-      ),
+      title: AppText(
+          text: task.title,
+          overflow: TextOverflow.ellipsis,
+          decoration: task.isDone! ? TextDecoration.lineThrough : null),
       subtitle: Text(DateFormat('MMM dd, yyyy - HH:mm')
           .format(DateTime.parse(task.regDate))),
       trailing: SizedBox(

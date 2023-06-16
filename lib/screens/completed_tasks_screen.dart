@@ -24,8 +24,6 @@ class CompletedTasksScreen extends StatelessWidget {
               TaskCounter(text: '${state.completedTasks.length} Tasks'),
               TaskList(
                 taskList: taskList,
-                ontap: () {},
-                task: state.completedTasks.first,
               ),
             ],
           ),

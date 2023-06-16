@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todo_bloc2/blocs/bloc_exports.dart';
 import 'package:todo_bloc2/services/guid_gen.dart';
+import 'package:todo_bloc2/widgets/app_text.dart';
 import '../models/task.dart';
 
 class AddTaskScreen extends StatefulWidget {
@@ -20,9 +21,16 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
       padding: const EdgeInsets.all(20),
       child: Column(
         children: [
-          const Text(
-            'Add a task',
-            style: TextStyle(fontSize: 26),
+          ListTile(
+            leading: Icon(
+              Icons.edit,
+              size: 30,
+            ),
+            title: AppText(
+              text: 'Add New Task',
+              weight: FontWeight.bold,
+              size: 20,
+            ),
           ),
           const SizedBox(
             height: 20,

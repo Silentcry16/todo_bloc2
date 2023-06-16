@@ -80,8 +80,7 @@ class _TaskScreenState extends State<TaskScreen> {
                     )
                   : TaskList(
                       taskList: taskList,
-                      ontap: () => _addTask(context),
-                      task: state.pendingTasks.first),
+                    )
             ],
           ),
           //opens the BottomSheet to add a new task

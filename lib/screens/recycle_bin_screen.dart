@@ -36,8 +36,6 @@ class RecycleBinScreen extends StatelessWidget {
                           Text('${state.removedTasks.length} Tasks Removed'))),
               TaskList(
                 taskList: state.removedTasks,
-                ontap: () {},
-                task: state.completedTasks.first,
               ),
             ],
           ),
