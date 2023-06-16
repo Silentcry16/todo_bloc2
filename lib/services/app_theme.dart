@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 enum AppTheme { lightTheme, darkTheme }
 
 class AppThemes {
+  AppThemes._();
   static final AppThemeData = {
     AppTheme.darkTheme: ThemeData(
       primaryColor: Colors.black,

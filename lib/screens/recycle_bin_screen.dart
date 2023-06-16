@@ -34,7 +34,11 @@ class RecycleBinScreen extends StatelessWidget {
                   child: Chip(
                       label:
                           Text('${state.removedTasks.length} Tasks Removed'))),
-              TaskList(taskList: state.removedTasks),
+              TaskList(
+                taskList: state.removedTasks,
+                ontap: () {},
+                task: state.completedTasks.first,
+              ),
             ],
           ),
           //opens the BottomSheet to add a new task

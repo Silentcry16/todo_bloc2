@@ -18,11 +18,8 @@ class CustomDrawer extends StatelessWidget {
             child: Column(
               children: [
                 AppBar(
-                  leading: IconButton(
-                    onPressed: () => Navigator.of(context).pop(),
-                    icon: const Icon(Icons.close),
-                  ),
-                  title: const Text('Hello Dear Friend'),
+                  leading: SizedBox.shrink(),
+                  title: Expanded(child: const Text('Hello Dear Friend')),
                 ),
                 BlocBuilder<SwitchBloc, SwitchState>(
                   builder: (context, state) {

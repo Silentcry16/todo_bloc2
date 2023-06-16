@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:todo_bloc2/models/task.dart';
+import 'package:todo_bloc2/widgets/task_counter.dart';
 
 import '../blocs/bloc_exports.dart';
 import '../widgets/task_list.dart';
@@ -20,10 +21,12 @@ class CompletedTasksScreen extends StatelessWidget {
         return Scaffold(
           body: Column(
             children: [
-              Center(
-                  child: Chip(
-                      label: Text('${state.completedTasks.length} Tasks'))),
-              TaskList(taskList: taskList),
+              TaskCounter(text: '${state.completedTasks.length} Tasks'),
+              TaskList(
+                taskList: taskList,
+                ontap: () {},
+                task: state.completedTasks.first,
+              ),
             ],
           ),
           //opens the BottomSheet to add a new task

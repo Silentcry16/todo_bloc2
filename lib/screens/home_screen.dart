@@ -1,12 +1,13 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:flutter/material.dart';
-import 'package:todo_bloc2/screens/task_screen.dart';
+
+import 'package:todo_bloc2/widgets/app_text.dart';
 
 import '../blocs/bloc_exports.dart';
 import '../widgets/add_task_screen.dart';
 import '../widgets/custom_drawer.dart';
-import 'completed_tasks_screen.dart';
+import '../widgets/home_screen_contents.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -30,8 +31,18 @@ class _HomeScreenState extends State<HomeScreen> {
           child: const CustomDrawer()),
       appBar: AppBar(
         title: currentIndex == BottomNavIndex.tasksIndex
-            ? const Text('Todo')
-            : const Text('Completed'),
+            ? AppText(
+                text: 'Pending Screen',
+                color: Colors.white,
+                size: MediaQuery.of(context).size.height * 0.03,
+                weight: FontWeight.bold,
+              )
+            : AppText(
+                text: 'Completed Tasks',
+                color: Colors.white,
+                size: MediaQuery.of(context).size.height * 0.03,
+                weight: FontWeight.bold,
+              ),
         actions: [
           currentIndex == BottomNavIndex.tasksIndex
               ? IconButton(
@@ -42,38 +53,10 @@ class _HomeScreenState extends State<HomeScreen> {
               : const SizedBox.shrink()
         ],
       ),
-      body: SafeArea(
-        child: Stack(
-          children: [
-            Positioned(
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              child: IndexedStack(
-                index: currentIndex,
-                children: [
-                  Navigator(
-                    key: _taskScreenKey,
-                    onGenerateRoute: (settings) =>
-                        MaterialPageRoute(builder: (context) => TaskScreen()),
-                  ),
-                  Navigator(
-                    key: _completedScreenKey,
-                    onGenerateRoute: (settings) => MaterialPageRoute(
-                        builder: (context) => const CompletedTasksScreen()),
-                  ),
-                  // Navigator(
-                  //   key: _favoriteScreenKey,
-                  //   onGenerateRoute: (settings) => MaterialPageRoute(
-                  //       builder: (context) => const FavoriteTasksScreen()),
-                  // ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
+      body: HomeScreenContents(
+          currentIndex: currentIndex,
+          taskScreenKey: _taskScreenKey,
+          completedScreenKey: _completedScreenKey),
       bottomNavigationBar: BtmNav(context),
     );
   }
