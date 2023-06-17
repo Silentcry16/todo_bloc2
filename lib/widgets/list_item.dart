@@ -20,7 +20,7 @@ class ListItem extends StatelessWidget {
       leading: CircleAvatar(
           backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
           child: Icon(
-            Icons.timer_outlined,
+            task.isDone == false ? Icons.timer_outlined : Icons.done,
             color: Theme.of(context).appBarTheme.foregroundColor,
           )),
       title: AppText(

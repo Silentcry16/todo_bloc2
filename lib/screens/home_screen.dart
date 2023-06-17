@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 
 import 'package:todo_bloc2/widgets/app_text.dart';
 
-import '../blocs/bloc_exports.dart';
 import '../widgets/add_task_screen.dart';
 import '../widgets/custom_drawer.dart';
 import '../widgets/home_screen_contents.dart';
+import '../widgets/custom_navigation_bar.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -57,7 +57,14 @@ class _HomeScreenState extends State<HomeScreen> {
           currentIndex: currentIndex,
           taskScreenKey: _taskScreenKey,
           completedScreenKey: _completedScreenKey),
-      bottomNavigationBar: BtmNav(context),
+      bottomNavigationBar: CustomNavigationBar(
+        currentIndex: currentIndex,
+        onIndexChanged: (index) {
+          setState(() {
+            currentIndex = index;
+          });
+        },
+      ),
     );
   }
 
@@ -75,117 +82,4 @@ class _HomeScreenState extends State<HomeScreen> {
       },
     );
   }
-
-  BlocBuilder<SwitchBloc, SwitchState> BtmNav(BuildContext context) {
-    return BlocBuilder<SwitchBloc, SwitchState>(
-      builder: (context, state) {
-        return Container(
-          color: state.switchValue ? Colors.grey : const Color(0xFF7b2cbf),
-          height: MediaQuery.of(context).size.height * 0.07,
-          width: double.infinity,
-          child: Row(
-            children: [
-              Expanded(
-                child: Column(
-                  children: [
-                    IconButton(
-                        onPressed: () {
-                          setState(() {
-                            currentIndex = BottomNavIndex.tasksIndex;
-                          });
-                        },
-                        icon: currentIndex == BottomNavIndex.tasksIndex
-                            ? const Icon(
-                                Icons.list,
-                                color: Colors.white,
-                                size: 35,
-                              )
-                            : const Icon(
-                                Icons.list,
-                                color: Colors.white70,
-                                size: 30,
-                              )),
-                    currentIndex == BottomNavIndex.tasksIndex
-                        ? Container(
-                            height: 3,
-                            decoration:
-                                const BoxDecoration(color: Colors.white),
-                          )
-                        : const SizedBox.shrink(),
-                  ],
-                ),
-              ),
-              Expanded(
-                child: Column(
-                  children: [
-                    IconButton(
-                        onPressed: () {
-                          setState(() {
-                            currentIndex = BottomNavIndex.completedIndex;
-                          });
-                        },
-                        icon: currentIndex == BottomNavIndex.completedIndex
-                            ? const Icon(
-                                Icons.done,
-                                color: Colors.white,
-                                size: 35,
-                              )
-                            : const Icon(
-                                Icons.done,
-                                color: Colors.white70,
-                                size: 30,
-                              )),
-                    currentIndex == BottomNavIndex.completedIndex
-                        ? Container(
-                            height: 3,
-                            decoration:
-                                const BoxDecoration(color: Colors.white),
-                          )
-                        : const SizedBox.shrink(),
-                  ],
-                ),
-              ),
-              // Expanded(
-              //   child: Column(
-              //     children: [
-              //       IconButton(
-              //           onPressed: () {
-              //             setState(() {
-              //               currentIndex = BottomNavIndex.favoriteIndex;
-              //             });
-              //           },
-              //           icon: currentIndex == BottomNavIndex.favoriteIndex
-              //               ? const Icon(
-              //                   Icons.favorite,
-              //                   color: Colors.white,
-              //                   size: 35,
-              //                 )
-              //               : const Icon(
-              //                   Icons.favorite,
-              //                   color: Colors.white70,
-              //                   size: 30,
-              //                 )),
-              //       currentIndex == BottomNavIndex.favoriteIndex
-              //           ? Container(
-              //               height: 3,
-              //               decoration:
-              //                   const BoxDecoration(color: Colors.white),
-              //             )
-              //           : const SizedBox.shrink(),
-              //     ],
-              //   ),
-              // ),
-            ],
-          ),
-        );
-      },
-    );
-  }
-}
-
-class BottomNavIndex {
-  BottomNavIndex._();
-  static const int tasksIndex = 0;
-  static const int completedIndex = 1;
-  // static const int favoriteIndex = 2;
 }
