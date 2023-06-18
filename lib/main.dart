@@ -1,5 +1,6 @@
 import 'package:path_provider/path_provider.dart';
 import 'package:todo_bloc2/screens/home_screen.dart';
+import 'package:todo_bloc2/screens/splash_screen.dart';
 import 'package:todo_bloc2/services/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:todo_bloc2/services/app_theme.dart';
@@ -37,7 +38,7 @@ class MyApp extends StatelessWidget {
             theme: state.switchValue
                 ? AppThemes.AppThemeData[AppTheme.darkTheme]
                 : AppThemes.AppThemeData[AppTheme.lightTheme],
-            home: const HomeScreen(),
+            home: const SplashScreen(),
             onGenerateRoute: appRouter.onGenerateRoute,
           );
         },

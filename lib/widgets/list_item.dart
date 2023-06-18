@@ -16,39 +16,49 @@ class ListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      leading: CircleAvatar(
-          backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
-          child: Icon(
-            task.isDone == false ? Icons.timer_outlined : Icons.done,
-            color: Theme.of(context).appBarTheme.foregroundColor,
-          )),
-      title: AppText(
-          text: task.title,
-          overflow: TextOverflow.ellipsis,
-          decoration: task.isDone! ? TextDecoration.lineThrough : null),
-      subtitle: Text(DateFormat('MMM dd, yyyy - HH:mm')
-          .format(DateTime.parse(task.regDate))),
-      trailing: SizedBox(
-        // color: Colors.amber,
-        width: 110,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Checkbox(
-              fillColor: MaterialStateProperty.all(
-                  Theme.of(context).appBarTheme.backgroundColor),
-              value: task.isDone,
-              onChanged: (val) {
-                context.read<TasksBloc>().add(UpdateTaskEvent(task: task));
-              },
+    return BlocBuilder<SwitchBloc, SwitchState>(
+      builder: (context, state) {
+        return ListTile(
+          leading: CircleAvatar(
+              backgroundColor:
+                  state.switchValue ? Colors.grey : const Color(0xFF7b2cbf),
+              child: Icon(
+                task.isDone == false ? Icons.timer_outlined : Icons.done,
+                color: Theme.of(context).appBarTheme.foregroundColor,
+              )),
+          title: AppText(
+            text: task.title,
+            overflow: TextOverflow.ellipsis,
+            decoration: task.isDone! ? TextDecoration.lineThrough : null,
+            color: state.switchValue ? Colors.white : Colors.black,
+            weight: FontWeight.bold,
+            size: 17,
+          ),
+          subtitle: Text(DateFormat('MMM dd, yyyy - HH:mm')
+              .format(DateTime.parse(task.regDate))),
+          trailing: SizedBox(
+            // color: Colors.amber,
+            width: 110,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Checkbox(
+                  fillColor: MaterialStateProperty.all(state.switchValue
+                      ? Colors.grey
+                      : const Color(0xFF7b2cbf)),
+                  value: task.isDone,
+                  onChanged: (val) {
+                    context.read<TasksBloc>().add(UpdateTaskEvent(task: task));
+                  },
+                ),
+                PopUpMenu(
+                  task: task,
+                ),
+              ],
             ),
-            PopUpMenu(
-              task: task,
-            ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }

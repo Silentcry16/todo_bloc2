@@ -5,9 +5,11 @@ part of 'tasks_bloc.dart';
 class TasksState extends Equatable {
   final List<Task> pendingTasks;
   final List<Task> completedTasks;
+  final DateTime? alarmTime;
   // final List<Task> favoriteTasks;
   final List<Task> removedTasks;
   const TasksState({
+    this.alarmTime,
     this.pendingTasks = const <Task>[],
     this.completedTasks = const <Task>[],
     // this.favoriteTasks = const <Task>[],
@@ -25,7 +27,7 @@ class TasksState extends Equatable {
     return <String, dynamic>{
       'pendingTasks': pendingTasks.map((x) => x.toMap()).toList(),
       'completedTasks': completedTasks.map((x) => x.toMap()).toList(),
-      // 'favoriteTasks': favoriteTasks.map((x) => x.toMap()).toList(),
+      'alarmTime': alarmTime?.millisecondsSinceEpoch,
       'removedTasks': removedTasks.map((x) => x.toMap()).toList(),
     };
   }
@@ -33,22 +35,20 @@ class TasksState extends Equatable {
   factory TasksState.fromMap(Map<String, dynamic> map) {
     return TasksState(
       pendingTasks: List<Task>.from(
-        (map['pendingTasks']).map<Task>(
+        (map['pendingTasks'] as List<int>).map<Task>(
           (x) => Task.fromMap(x as Map<String, dynamic>),
         ),
       ),
       completedTasks: List<Task>.from(
-        (map['completedTasks']).map<Task>(
+        (map['completedTasks'] as List<int>).map<Task>(
           (x) => Task.fromMap(x as Map<String, dynamic>),
         ),
       ),
-      // favoriteTasks: List<Task>.from(
-      //   (map['favoriteTasks']).map<Task>(
-      //     (x) => Task.fromMap(x as Map<String, dynamic>),
-      //   ),
-      // ),
+      alarmTime: map['alarmTime'] != null
+          ? DateTime.fromMillisecondsSinceEpoch(map['alarmTime'] as int)
+          : null,
       removedTasks: List<Task>.from(
-        (map['removedTasks']).map<Task>(
+        (map['removedTasks'] as List<int>).map<Task>(
           (x) => Task.fromMap(x as Map<String, dynamic>),
         ),
       ),

@@ -30,9 +30,12 @@ class $AssetsImagesGen {
   AssetGenImage get notepadDarkmode =>
       const AssetGenImage('assets/images/notepad_darkmode.png');
 
+  /// File path: assets/images/splash.png
+  AssetGenImage get splash => const AssetGenImage('assets/images/splash.png');
+
   /// List of all assets
   List<AssetGenImage> get values =>
-      [add, addItem, emptyNote, notepad, notepadDarkmode];
+      [add, addItem, emptyNote, notepad, notepadDarkmode, splash];
 }
 
 class Assets {

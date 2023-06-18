@@ -12,6 +12,7 @@ class TasksBloc extends HydratedBloc<TasksEvent, TasksState> {
     on<DeleteTaskEvent>(_onDeleteTask);
     on<RemoveTaskEvent>(_onRemoveTask);
     on<DeleteAllTask>(_onDeleteAllTask);
+    on<SetalarmEvent>(_onSetAlarmTask);
     // on<IsfavoriteTaskEvent>(_onIsFavoriteTask);
     on<RestoreTaskEvent>(_onRestoreTask);
     on<EditTaskEvent>(_onEditTask);
@@ -88,6 +89,18 @@ class TasksBloc extends HydratedBloc<TasksEvent, TasksState> {
           completedTasks: state.completedTasks,
           // favoriteTasks: state.favoriteTasks,
           removedTasks: const []),
+    );
+  }
+
+  void _onSetAlarmTask(SetalarmEvent event, Emitter<TasksState> emit) {
+    final state = this.state;
+    emit(
+      TasksState(
+          pendingTasks: List.from(state.pendingTasks)..remove(event.task),
+          completedTasks: List.from(state.completedTasks)..remove(event.task),
+          // favoriteTasks: List.from(state.favoriteTasks)..remove(event.task),
+          removedTasks: List.from(state.removedTasks)
+            ..add(event.task.copyWith(isDeleted: true))),
     );
   }
 

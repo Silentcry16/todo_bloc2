@@ -19,62 +19,71 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
       padding: const EdgeInsets.all(20),
-      child: Column(
-        children: [
-          ListTile(
-            leading: Icon(
-              Icons.edit,
-              size: 30,
-            ),
-            title: AppText(
-              text: 'Add New Task',
-              weight: FontWeight.bold,
-              size: 20,
-            ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          TextField(
-            autofocus: true,
-            controller: titleController,
-            decoration: InputDecoration(
-                hintText: 'Title...',
-                labelText: 'Task Title',
-                prefixIcon: const Icon(Icons.text_fields),
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
-                    borderSide: const BorderSide(color: Colors.black26))),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          TextField(
-            minLines: 3,
-            maxLines: 5,
-            controller: descriptionController,
-            decoration: InputDecoration(
-                // hintText: 'Description...',
-                labelText: 'Description...',
-                prefixIcon: const Icon(Icons.text_fields),
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
-                    borderSide: const BorderSide(color: Colors.black26))),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Expanded(
-                    child: ElevatedButton(
-                        onPressed: () => Navigator.of(context).pop(),
-                        child: const Text('Cancell'))),
-                const SizedBox(
-                  width: 20,
+      child: BlocBuilder<SwitchBloc, SwitchState>(
+        builder: (context, state) {
+          return Column(
+            children: [
+              ListTile(
+                leading: Icon(
+                  Icons.edit,
+                  size: 30,
                 ),
-                Expanded(
-                    child: ElevatedButton(
+                title: AppText(
+                  color: state.switchValue ? Colors.white : Colors.black,
+                  text: 'Add New Task',
+                  weight: FontWeight.bold,
+                  size: 20,
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              TextField(
+                autofocus: true,
+                controller: titleController,
+                decoration: InputDecoration(
+                    hintText: 'Title...',
+                    labelText: 'Task Title',
+                    prefixIcon: const Icon(Icons.text_fields),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                        borderSide: const BorderSide(color: Colors.black26))),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              TextField(
+                minLines: 3,
+                maxLines: 5,
+                controller: descriptionController,
+                decoration: InputDecoration(
+                    // hintText: 'Description...',
+                    labelText: 'Description...',
+                    prefixIcon: const Icon(Icons.text_fields),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                        borderSide: const BorderSide(color: Colors.black26))),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                        child: ElevatedButton(
+                            onPressed: () => Navigator.of(context).pop(),
+                            child: AppText(
+                              text: 'Cancell',
+                              weight: FontWeight.bold,
+                              color: state.switchValue
+                                  ? Colors.black
+                                  : Colors.white,
+                            ))),
+                    const SizedBox(
+                      width: 20,
+                    ),
+                    Expanded(
+                      child: ElevatedButton(
                         onPressed: () {
                           var task = Task(
                               id: GUIDGen.generate(),
@@ -88,11 +97,20 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                           titleController.clear();
                           descriptionController.clear();
                         },
-                        child: const Text('Add'))),
-              ],
-            ),
-          ),
-        ],
+                        child: AppText(
+                          text: 'Add',
+                          weight: FontWeight.bold,
+                          color:
+                              state.switchValue ? Colors.black : Colors.white,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          );
+        },
       ),
     );
   }

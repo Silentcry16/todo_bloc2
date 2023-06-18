@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:todo_bloc2/models/task.dart';
+import 'package:todo_bloc2/widgets/app_text.dart';
 import 'package:todo_bloc2/widgets/edit_task.dart';
 
 import '../blocs/bloc_exports.dart';
@@ -41,9 +42,13 @@ class PopUpMenu extends StatelessWidget {
                   PopupMenuItem(
                     child: InkWell(
                       onTap: () => editTask(context),
-                      child: const ListTile(
-                        leading: Icon(Icons.edit),
-                        title: Text('Edit'),
+                      child: ListTile(
+                        leading: const Icon(Icons.edit),
+                        title: AppText(
+                          text: 'Edit',
+                          color:
+                              state.switchValue ? Colors.white : Colors.black,
+                        ),
                       ),
                     ),
                   ),
@@ -64,9 +69,12 @@ class PopUpMenu extends StatelessWidget {
                     onTap: () => context
                         .read<TasksBloc>()
                         .add(RemoveTaskEvent(task: task)),
-                    child: const ListTile(
-                      leading: Icon(Icons.remove),
-                      title: Text('Remove'),
+                    child: ListTile(
+                      leading: const Icon(Icons.remove),
+                      title: AppText(
+                        text: 'Remove',
+                        color: state.switchValue ? Colors.white : Colors.black,
+                      ),
                     ),
                   ),
                 ],
@@ -81,17 +89,24 @@ class PopUpMenu extends StatelessWidget {
                       onTap: () => context
                           .read<TasksBloc>()
                           .add(RestoreTaskEvent(task: task)),
-                      child: const ListTile(
-                        leading: Icon(Icons.restart_alt_rounded),
-                        title: Text('Restore'),
+                      child: ListTile(
+                        leading: const Icon(Icons.restart_alt_rounded),
+                        title: AppText(
+                          text: 'Restore',
+                          color:
+                              state.switchValue ? Colors.white : Colors.black,
+                        ),
                       )),
                   PopupMenuItem(
                     onTap: () => context
                         .read<TasksBloc>()
                         .add(DeleteTaskEvent(task: task)),
-                    child: const ListTile(
-                      leading: Icon(Icons.delete_forever),
-                      title: Text('Delete forever'),
+                    child: ListTile(
+                      leading: const Icon(Icons.delete_forever),
+                      title: AppText(
+                        text: 'Delete forever',
+                        color: state.switchValue ? Colors.white : Colors.black,
+                      ),
                     ),
                   ),
                 ],

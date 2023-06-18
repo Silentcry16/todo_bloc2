@@ -33,7 +33,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
                 child: TextButton.icon(
                     label: AppText(
                       text: 'Pending',
-                      color: state.switchValue ? Colors.black : Colors.white,
+                      color: Colors.white,
                       size: widget.currentIndex == BottomNavIndex.tasksIndex
                           ? 18
                           : 15,
@@ -63,7 +63,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
                 child: TextButton.icon(
                     label: AppText(
                       text: 'Completed',
-                      color: state.switchValue ? Colors.black : Colors.white,
+                      color: Colors.white,
                       size: widget.currentIndex == BottomNavIndex.completedIndex
                           ? 18
                           : 15,
