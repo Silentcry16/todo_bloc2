@@ -9,7 +9,7 @@ import '../widgets/add_task_screen.dart';
 import '../widgets/task_list.dart';
 
 class PendingScreen extends StatefulWidget {
-  PendingScreen({super.key});
+  const PendingScreen({super.key});
 
   static const id = 'task_screen';
 
@@ -57,7 +57,7 @@ class _PendingScreenState extends State<PendingScreen> {
                             children: [
                               BlocBuilder<SwitchBloc, SwitchState>(
                                 builder: (context, state) {
-                                  return Container(
+                                  return SizedBox(
                                     // color: Colors.amber,
                                     height: size.height / 5,
                                     width: size.width / 3,

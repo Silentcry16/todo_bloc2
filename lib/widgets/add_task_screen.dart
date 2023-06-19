@@ -24,7 +24,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
           return Column(
             children: [
               ListTile(
-                leading: Icon(
+                leading: const Icon(
                   Icons.edit,
                   size: 30,
                 ),

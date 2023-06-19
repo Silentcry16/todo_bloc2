@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:todo_bloc2/widgets/app_text.dart';
 
-import '../blocs/bloc_exports.dart';
-import '../screens/home_screen.dart';
+import '../../../blocs/bloc_exports.dart';
+import '../home_screen.dart';
 
+// ignore: must_be_immutable
 class CustomNavigationBar extends StatefulWidget {
   CustomNavigationBar(
       {super.key, required this.currentIndex, required this.onIndexChanged});
@@ -21,7 +22,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
     return BlocBuilder<SwitchBloc, SwitchState>(
       builder: (context, state) {
         return Container(
-          margin: EdgeInsets.all(10),
+          margin: const EdgeInsets.all(10),
           decoration: BoxDecoration(
               color: state.switchValue ? Colors.grey : const Color(0xFF7b2cbf),
               borderRadius: BorderRadius.circular(15)),
@@ -129,9 +130,9 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
   }
 }
 
-class BottomNavIndex {
-  BottomNavIndex._();
-  static const int tasksIndex = 0;
-  static const int completedIndex = 1;
-  // static const int favoriteIndex = 2;
-}
+// class BottomNavIndex {
+//   BottomNavIndex._();
+//   static const int tasksIndex = 0;
+//   static const int completedIndex = 1;
+//   // static const int favoriteIndex = 2;
+// }

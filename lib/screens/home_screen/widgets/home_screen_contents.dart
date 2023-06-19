@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../screens/completed_tasks_screen.dart';
-import '../screens/pending_screen.dart';
+import '../../completed_tasks_screen.dart';
+import '../../pending_screen.dart';
 
 class HomeScreenContents extends StatelessWidget {
   const HomeScreenContents({
@@ -32,7 +32,7 @@ class HomeScreenContents extends StatelessWidget {
                 Navigator(
                   key: _taskScreenKey,
                   onGenerateRoute: (settings) =>
-                      MaterialPageRoute(builder: (context) => PendingScreen()),
+                      MaterialPageRoute(builder: (context) => const PendingScreen()),
                 ),
                 Navigator(
                   key: _completedScreenKey,

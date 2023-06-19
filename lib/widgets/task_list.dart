@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:todo_bloc2/widgets/app_text.dart';
-import '../blocs/bloc_exports.dart';
 import '../models/task.dart';
 import 'list_item.dart';
 

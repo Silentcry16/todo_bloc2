@@ -6,7 +6,7 @@ class Dimensions {
   static double screenwidth =
       Get.context!.width; //calculated based on  width: 392
 
-  static double pageView = screenHeight / 2.37;
+  static double pageView = screenHeight / 2.37;  
   static double pageViewContainer = screenHeight / 3.45;
   static double pageViewTextContainer = screenHeight / 5.8;
 

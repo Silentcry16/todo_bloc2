@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todo_bloc2/screens/home_screen.dart';
+import 'package:todo_bloc2/screens/home_screen/home_screen.dart';
 import 'package:todo_bloc2/screens/recycle_bin_screen.dart';
 import 'package:todo_bloc2/widgets/app_text.dart';
 
@@ -21,7 +21,7 @@ class CustomDrawer extends StatelessWidget {
                 child: Column(
                   children: [
                     PreferredSize(
-                      preferredSize: Size.fromHeight(100),
+                      preferredSize: const Size.fromHeight(100),
                       child: AppBar(
                         leading: const Icon(
                           Icons.settings,

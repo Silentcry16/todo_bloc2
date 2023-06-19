@@ -1,5 +1,4 @@
 import 'package:path_provider/path_provider.dart';
-import 'package:todo_bloc2/screens/home_screen.dart';
 import 'package:todo_bloc2/screens/splash_screen.dart';
 import 'package:todo_bloc2/services/app_router.dart';
 import 'package:flutter/material.dart';

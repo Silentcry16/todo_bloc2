@@ -12,12 +12,19 @@ import 'package:flutter/widgets.dart';
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/Logo.png
+  AssetGenImage get logo => const AssetGenImage('assets/images/Logo.png');
+
   /// File path: assets/images/add.png
   AssetGenImage get add => const AssetGenImage('assets/images/add.png');
 
   /// File path: assets/images/add_item.png
   AssetGenImage get addItem =>
       const AssetGenImage('assets/images/add_item.png');
+
+  /// File path: assets/images/auther_logo.png
+  AssetGenImage get autherLogo =>
+      const AssetGenImage('assets/images/auther_logo.png');
 
   /// File path: assets/images/emptyNote.png
   AssetGenImage get emptyNote =>
@@ -34,8 +41,16 @@ class $AssetsImagesGen {
   AssetGenImage get splash => const AssetGenImage('assets/images/splash.png');
 
   /// List of all assets
-  List<AssetGenImage> get values =>
-      [add, addItem, emptyNote, notepad, notepadDarkmode, splash];
+  List<AssetGenImage> get values => [
+        logo,
+        add,
+        addItem,
+        autherLogo,
+        emptyNote,
+        notepad,
+        notepadDarkmode,
+        splash
+      ];
 }
 
 class Assets {
