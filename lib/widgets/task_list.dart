@@ -20,6 +20,7 @@ class TaskList extends StatelessWidget {
                 children: taskList
                     .map(
                       (task) => ExpansionPanelRadio(
+                        backgroundColor: task.color,
                         value: task.id,
                         headerBuilder: (context, isExpanded) =>
                             ListItem(task: task),

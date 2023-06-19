@@ -3,17 +3,16 @@ part of 'tasks_bloc.dart';
 class TasksState extends Equatable {
   final List<Task> pendingTasks;
   final List<Task> completedTasks;
-  // final List<Task> favoriteTasks;
   final List<Task> removedTasks;
+
   const TasksState({
     this.pendingTasks = const <Task>[],
     this.completedTasks = const <Task>[],
-    // this.favoriteTasks = const <Task>[],
     this.removedTasks = const <Task>[],
   });
 
   @override
-  List<Object> get props => [pendingTasks, removedTasks];
+  List<Object> get props => [pendingTasks, completedTasks, removedTasks];
 
 // toMap() and fromMap() are responsible for converting
 //the state object to a map representation and reconstructing the state

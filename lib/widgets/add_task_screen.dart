@@ -12,7 +12,7 @@ class AddTaskScreen extends StatefulWidget {
 }
 
 class _AddTaskScreenState extends State<AddTaskScreen> {
-  late final Color color;
+  Color? color;
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -44,11 +44,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   IconButton(
-                    onPressed: () {
-                      setState(() {
-                        color = Color(0xFFffb7ff);
-                      });
-                    },
+                    onPressed: () => color = Color(0xFFffb7ff),
                     icon: Container(
                       width: 30,
                       height: 30,
@@ -58,11 +54,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                     ),
                   ),
                   IconButton(
-                    onPressed: () {
-                      setState(() {
-                        color = Color(0xFFffc2e2);
-                      });
-                    },
+                    onPressed: () => color = Color(0xFFffc2e2),
                     icon: Container(
                       width: 30,
                       height: 30,
@@ -72,11 +64,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                     ),
                   ),
                   IconButton(
-                    onPressed: () {
-                      setState(() {
-                        color = Color(0xFFb892ff);
-                      });
-                    },
+                    onPressed: () => color = Color(0xFFb892ff),
                     icon: Container(
                       width: 30,
                       height: 30,
@@ -86,11 +74,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                     ),
                   ),
                   IconButton(
-                    onPressed: () {
-                      setState(() {
-                        color = Color(0xFFedf67d);
-                      });
-                    },
+                    onPressed: () => color = Color(0xFFedf67d),
                     icon: Container(
                       width: 30,
                       height: 30,
@@ -100,11 +84,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                     ),
                   ),
                   IconButton(
-                    onPressed: () {
-                      setState(() {
-                        color = Color(0xFF858ae3);
-                      });
-                    },
+                    onPressed: () => color = Color(0xFF858ae3),
                     icon: Container(
                       width: 30,
                       height: 30,
@@ -171,6 +151,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                           var task = Task(
                             id: GUIDGen.generate(),
                             title: titleController.text,
+                            color: color ?? Colors.white,
                             regDate: DateTime.now().toString(),
                             description: descriptionController.text,
                           );

@@ -53,19 +53,6 @@ class PopUpMenu extends StatelessWidget {
                       ),
                     ),
                   ),
-                  // PopupMenuItem(
-                  //   onTap: () => context
-                  //       .read<TasksBloc>()
-                  //       .add(IsfavoriteTaskEvent(task: task)),
-                  //   child: ListTile(
-                  //     leading: task.isFavorite == false
-                  //         ? const Icon(Icons.bookmark_add_outlined)
-                  //         : const Icon(Icons.bookmark),
-                  //     title: task.isFavorite == false
-                  //         ? const Text('Add to bookmark')
-                  //         : const Text('Remove from bookmarks'),
-                  //   ),
-                  // ),
                   PopupMenuItem(
                     onTap: () => context
                         .read<TasksBloc>()
