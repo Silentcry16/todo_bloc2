@@ -46,13 +46,13 @@ class _EditTaskState extends State<EditTask> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  GestureDetector(
-                    onTap: () {
+                  IconButton(
+                    onPressed: () {
                       setState(() {
                         color = Color(0xFFffb7ff);
                       });
                     },
-                    child: Container(
+                    icon: Container(
                       width: 30,
                       height: 30,
                       decoration: BoxDecoration(
@@ -60,13 +60,13 @@ class _EditTaskState extends State<EditTask> {
                           color: Color(0xFFffb7ff)),
                     ),
                   ),
-                  GestureDetector(
-                    onTap: () {
+                  IconButton(
+                    onPressed: () {
                       setState(() {
                         color = Color(0xFFffc2e2);
                       });
                     },
-                    child: Container(
+                    icon: Container(
                       width: 30,
                       height: 30,
                       decoration: BoxDecoration(
@@ -74,13 +74,13 @@ class _EditTaskState extends State<EditTask> {
                           color: Color(0xFFffc2e2)),
                     ),
                   ),
-                  GestureDetector(
-                    onTap: () {
+                  IconButton(
+                    onPressed: () {
                       setState(() {
                         color = Color(0xFFb892ff);
                       });
                     },
-                    child: Container(
+                    icon: Container(
                       width: 30,
                       height: 30,
                       decoration: BoxDecoration(
@@ -88,13 +88,13 @@ class _EditTaskState extends State<EditTask> {
                           color: Color(0xFFb892ff)),
                     ),
                   ),
-                  GestureDetector(
-                    onTap: () {
+                  IconButton(
+                    onPressed: () {
                       setState(() {
                         color = Color(0xFFedf67d);
                       });
                     },
-                    child: Container(
+                    icon: Container(
                       width: 30,
                       height: 30,
                       decoration: BoxDecoration(
@@ -102,20 +102,20 @@ class _EditTaskState extends State<EditTask> {
                           color: Color(0xFFedf67d)),
                     ),
                   ),
-                  GestureDetector(
-                    onTap: () {
+                  IconButton(
+                    onPressed: () {
                       setState(() {
-                        color = Color(0xFFc0fdff);
+                        color = Color(0xFF858ae3);
                       });
                     },
-                    child: Container(
+                    icon: Container(
                       width: 30,
                       height: 30,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(30),
-                          color: Color(0xFFc0fdff)),
+                          color: Color(0xFF858ae3)),
                     ),
-                  )
+                  ),
                 ],
               ),
               SizedBox(
