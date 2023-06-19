@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:todo_bloc2/gen/assets.gen.dart';
-import 'package:todo_bloc2/screens/home_screen/home_screen.dart';
-import 'package:todo_bloc2/services/app_dimens.dart';
-import 'package:todo_bloc2/widgets/app_text.dart';
+import 'package:todo_bloc2/screens/home_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -17,12 +13,8 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    _navigateToHomeScreen();
-  }
-
-  Future<void> _navigateToHomeScreen() async {
-    await Future.delayed(const Duration(seconds: 3));
-    Navigator.pushReplacementNamed(context, HomeScreen.id);
+    Future.delayed(const Duration(seconds: 3)).then(
+        (value) => Navigator.pushReplacementNamed(context, HomeScreen.id));
   }
 
   @override

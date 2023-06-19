@@ -16,6 +16,7 @@ class PopUpMenu extends StatelessWidget {
   final Task task;
 
   void editTask(BuildContext ctx) {
+    Navigator.of(ctx).pop();
     showModalBottomSheet(
       context: ctx,
       isScrollControlled: true,
@@ -70,7 +71,7 @@ class PopUpMenu extends StatelessWidget {
                         .read<TasksBloc>()
                         .add(RemoveTaskEvent(task: task)),
                     child: ListTile(
-                      leading: const Icon(Icons.remove),
+                      leading: const Icon(Icons.delete),
                       title: AppText(
                         text: 'Remove',
                         color: state.switchValue ? Colors.white : Colors.black,

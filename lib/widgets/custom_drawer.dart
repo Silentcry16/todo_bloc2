@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:todo_bloc2/screens/home_screen/home_screen.dart';
+
+import 'package:todo_bloc2/screens/home_screen.dart';
 import 'package:todo_bloc2/screens/recycle_bin_screen.dart';
 import 'package:todo_bloc2/widgets/app_text.dart';
 
@@ -10,28 +11,30 @@ class CustomDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Drawer(
-      elevation: 10,
+      elevation: size.height * 0.01,
       child: BlocBuilder<TasksBloc, TasksState>(
         builder: (context, state1) {
           return BlocBuilder<SwitchBloc, SwitchState>(
             builder: (context, state2) {
               return SizedBox(
-                height: MediaQuery.of(context).size.height * 0.8,
+                height: size.height * 0.8,
                 child: Column(
                   children: [
                     PreferredSize(
                       preferredSize: const Size.fromHeight(100),
                       child: AppBar(
-                        leading: const Icon(
-                          Icons.settings,
-                          size: 30,
+                        leading: IconButton(
+                          onPressed: () => Navigator.of(context).pop(),
+                          icon: const Icon(Icons.close),
+                          //  size.height * 0.03,
                         ),
                         title: AppText(
                           color: Colors.white,
                           text: 'Settings',
                           weight: FontWeight.bold,
-                          size: 22,
+                          size: size.height * 0.025,
                         ),
                       ),
                     ),

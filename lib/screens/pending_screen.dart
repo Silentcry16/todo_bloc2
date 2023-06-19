@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_bloc2/gen/assets.gen.dart';
 import 'package:todo_bloc2/models/task.dart';
-import 'package:todo_bloc2/widgets/app_text.dart';
 import 'package:todo_bloc2/widgets/task_counter.dart';
 
 import '../blocs/bloc_exports.dart';
@@ -55,11 +54,11 @@ class _PendingScreenState extends State<PendingScreen> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
+                              const Spacer(),
                               BlocBuilder<SwitchBloc, SwitchState>(
                                 builder: (context, state) {
                                   return SizedBox(
                                     // color: Colors.amber,
-                                    height: size.height / 5,
                                     width: size.width / 3,
                                     child: state.switchValue == false
                                         ? Image.asset(
@@ -73,18 +72,23 @@ class _PendingScreenState extends State<PendingScreen> {
                                   );
                                 },
                               ),
-                              const SizedBox(
-                                height: 12,
+                              SizedBox(
+                                height: size.height * 0.02,
                               ),
-                              AppText(
-                                text: 'Stay organized and productive',
-                                weight: FontWeight.bold,
-                                size: 17,
-                                color: state2.switchValue
-                                    ? Colors.white
-                                    : Colors.black,
+                              Text(
+                                'Stay organized and productive',
+                                style: TextStyle(
+                                  color: state2.switchValue
+                                      ? Colors.white
+                                      : Colors.black,
+                                  fontSize: size.height * 0.026,
+                                  fontFamily: 'balker',
+                                  // fontWeight: FontWeight.bold,
+                                ),
                               ),
-                              const Expanded(child: SizedBox.shrink()),
+                              const Spacer(
+                                flex: 2,
+                              ),
                             ],
                           ),
                         )
@@ -104,75 +108,3 @@ class _PendingScreenState extends State<PendingScreen> {
     );
   }
 }
-
-
-
-
-
-// search widget
-// BlocBuilder<SwitchBloc, SwitchState>(
-              //   builder: (context, state) {
-              //     return Container(
-              //       padding: const EdgeInsets.only(top: 10),
-              //       height: size.height * 0.06,
-              //       margin: const EdgeInsets.symmetric(
-              //           horizontal: 20, vertical: 10),
-              //       decoration: state.switchValue == false
-              //           ? BoxDecoration(
-              //               color: Colors.white,
-              //               boxShadow: const [
-              //                 BoxShadow(
-              //                   color: Colors.black12,
-              //                   blurRadius: 11.0,
-              //                   spreadRadius: 2.0,
-              //                   offset: Offset(0, 0),
-              //                 ),
-              //               ],
-              //               borderRadius: BorderRadius.circular(50),
-              //             )
-              //           : BoxDecoration(
-              //               color: Colors.black,
-              //               boxShadow: const [
-              //                 BoxShadow(
-              //                   color: Colors.black12,
-              //                   blurRadius: 11.0,
-              //                   spreadRadius: 2.0,
-              //                   offset: Offset(0, 0),
-              //                 ),
-              //               ],
-              //               borderRadius: BorderRadius.circular(50),
-              //             ),
-              //       child: Row(
-              //         crossAxisAlignment: CrossAxisAlignment.start,
-              //         children: [
-              //           Container(
-              //               margin: const EdgeInsets.only(left: 10),
-              //               child: state.switchValue == false
-              //                   ? Icon(
-              //                       Icons.search,
-              //                       size: 30,
-              //                     )
-              //                   : Icon(
-              //                       Icons.search,
-              //                       size: 30,
-              //                       color: Colors.black,
-              //                     )),
-              //           Expanded(
-              //             child: TextField(
-              //               controller: searchController,
-              //               decoration: const InputDecoration(
-              //                 hintText: 'Search a task...',
-              //                 focusedBorder: OutlineInputBorder(
-              //                     borderSide: BorderSide.none),
-              //                 enabledBorder: OutlineInputBorder(
-              //                     borderSide: BorderSide.none),
-              //                 border: OutlineInputBorder(
-              //                     borderSide: BorderSide.none),
-              //               ),
-              //             ),
-              //           )
-              //         ],
-              //       ),
-              //     );
-              //   },
-              // ),

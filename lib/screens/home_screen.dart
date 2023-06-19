@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 import 'package:todo_bloc2/widgets/app_text.dart';
 
-import '../../blocs/bloc_exports.dart';
-import '../../widgets/add_task_screen.dart';
-import '../../widgets/custom_drawer.dart';
-import '../completed_tasks_screen.dart';
-import '../pending_screen.dart';
+import '../blocs/bloc_exports.dart';
+import '../widgets/add_task_screen.dart';
+import '../widgets/custom_drawer.dart';
+import 'completed_tasks_screen.dart';
+import 'pending_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -28,69 +28,6 @@ class _HomeScreenState extends State<HomeScreen> {
   };
 
   final List<int> routeHistoryList = [0];
-
-  // Future<bool> _onWillpop() async {
-  //   if (navigationMapper[currentIndex]!.currentState!.canPop()) {
-  //     navigationMapper[currentIndex]!.currentState!.pop();
-  //   } else if (routeHistoryList.length > 1) {
-  //     setState(() {
-  //       routeHistoryList.remove(routeHistoryList.last);
-  //       currentIndex = routeHistoryList.last;
-  //     });
-  //   } else if (routeHistoryList.length == 1) {
-  //     setState(() {
-  //       currentIndex = routeHistoryList.first;
-  //     });
-  //   }
-  //   print(routeHistoryList);
-  //   return false;
-  // }
-
-  // Future<bool> _onWillpop() async {
-  //   if (navigationMapper[currentIndex]!.currentState!.canPop()) {
-  //     navigationMapper[currentIndex]!.currentState!.pop();
-  //   } else if (routeHistoryList.length > 1) {
-  //     setState(() {
-  //       routeHistoryList.remove(routeHistoryList.last);
-  //       currentIndex = routeHistoryList.last;
-  //     });
-  //   } else if (routeHistoryList.length == 1) {
-  //     setState(() {
-  //       currentIndex = routeHistoryList.first;
-  //     });
-  //   } else {
-  //     // If there are no screens to go back to, show an exit dialog
-  //     await showDialog(
-  //       context: context,
-  //       builder: (context) {
-  //         return AlertDialog(
-  //           title: const Text('Exit'),
-  //           content: const Text('Are you sure you want to exit the app?'),
-  //           actions: [
-  //             TextButton(
-  //               onPressed: () {
-  //                 Navigator.of(context).pop(false); // Stay in the app
-  //               },
-  //               child: const Text('Cancel'),
-  //             ),
-  //             TextButton(
-  //               onPressed: () {
-  //                 Navigator.of(context).pop(true); // Exit the app
-  //               },
-  //               child: const Text('Exit'),
-  //             ),
-  //           ],
-  //         );
-  //       },
-  //     ).then((exit) {
-  //       if (exit == true) {
-  //         SystemNavigator.pop(); // Exit the app
-  //       }
-  //     });
-  //   }
-  //   print(routeHistoryList);
-  //   return false;
-  // }
 
   Future<bool> _onWillPop() async {
     if (navigationMapper[currentIndex]!.currentState!.canPop()) {
@@ -142,6 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
   int currentIndex = BottomNavIndex.tasksIndex;
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(
@@ -153,13 +91,13 @@ class _HomeScreenState extends State<HomeScreen> {
               ? AppText(
                   text: 'Pending Screen',
                   color: Colors.white,
-                  size: MediaQuery.of(context).size.height * 0.03,
+                  size: MediaQuery.of(context).size.height * 0.02,
                   weight: FontWeight.bold,
                 )
               : AppText(
                   text: 'Completed Tasks',
                   color: Colors.white,
-                  size: MediaQuery.of(context).size.height * 0.03,
+                  size: MediaQuery.of(context).size.height * 0.02,
                   weight: FontWeight.bold,
                 ),
           actions: [
@@ -193,11 +131,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       onGenerateRoute: (settings) => MaterialPageRoute(
                           builder: (context) => const CompletedTasksScreen()),
                     ),
-                    // Navigator(
-                    //   key: _favoriteScreenKey,
-                    //   onGenerateRoute: (settings) => MaterialPageRoute(
-                    //       builder: (context) => const FavoriteTasksScreen()),
-                    // ),
                   ],
                 ),
               ),
@@ -207,12 +140,15 @@ class _HomeScreenState extends State<HomeScreen> {
         bottomNavigationBar: BlocBuilder<SwitchBloc, SwitchState>(
           builder: (context, state) {
             return Container(
-              margin: const EdgeInsets.all(10),
+              margin: EdgeInsets.only(
+                  left: size.height * 0.015,
+                  right: size.height * 0.015,
+                  bottom: size.height * 0.015),
               decoration: BoxDecoration(
                   color:
                       state.switchValue ? Colors.grey : const Color(0xFF7b2cbf),
-                  borderRadius: BorderRadius.circular(15)),
-              height: MediaQuery.of(context).size.height * 0.075,
+                  borderRadius: BorderRadius.circular(size.height * 0.02)),
+              height: size.height * 0.075,
               width: double.infinity,
               child: Row(
                 children: [
@@ -278,37 +214,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                 size: 30,
                               )),
                   ),
-                  //favorite icon
-                  // Expanded(
-                  //   child: Column(
-                  //     children: [
-                  //       IconButton(
-                  //           onPressed: () {
-                  //             setState(() {
-                  //               currentIndex = BottomNavIndex.favoriteIndex;
-                  //             });
-                  //           },
-                  //           icon: currentIndex == BottomNavIndex.favoriteIndex
-                  //               ? const Icon(
-                  //                   Icons.favorite,
-                  //                   color: Colors.white,
-                  //                   size: 35,
-                  //                 )
-                  //               : const Icon(
-                  //                   Icons.favorite,
-                  //                   color: Colors.white70,
-                  //                   size: 30,
-                  //                 )),
-                  //       currentIndex == BottomNavIndex.favoriteIndex
-                  //           ? Container(
-                  //               height: 3,
-                  //               decoration:
-                  //                   const BoxDecoration(color: Colors.white),
-                  //             )
-                  //           : const SizedBox.shrink(),
-                  //     ],
-                  //   ),
-                  // ),
                 ],
               ),
             );

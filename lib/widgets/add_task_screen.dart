@@ -12,31 +12,111 @@ class AddTaskScreen extends StatefulWidget {
 }
 
 class _AddTaskScreenState extends State<AddTaskScreen> {
+  late final Color color;
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     TextEditingController titleController = TextEditingController();
     TextEditingController descriptionController = TextEditingController();
     return Container(
-      margin: const EdgeInsets.only(bottom: 10),
-      padding: const EdgeInsets.all(20),
+      margin: EdgeInsets.only(bottom: size.height * 0.02),
+      padding: EdgeInsets.all(size.height * 0.03),
       child: BlocBuilder<SwitchBloc, SwitchState>(
         builder: (context, state) {
           return Column(
             children: [
               ListTile(
-                leading: const Icon(
+                leading: Icon(
                   Icons.edit,
-                  size: 30,
+                  size: size.height * 0.04,
                 ),
                 title: AppText(
                   color: state.switchValue ? Colors.white : Colors.black,
                   text: 'Add New Task',
                   weight: FontWeight.bold,
-                  size: 20,
+                  size: size.height * 0.03,
                 ),
               ),
-              const SizedBox(
-                height: 20,
+              SizedBox(
+                height: size.height * 0.03,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        color = Color(0xFFffb7ff);
+                      });
+                    },
+                    child: Container(
+                      width: 30,
+                      height: 30,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          color: Color(0xFFffb7ff)),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        color = Color(0xFFffc2e2);
+                      });
+                    },
+                    child: Container(
+                      width: 30,
+                      height: 30,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          color: Color(0xFFffc2e2)),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        color = Color(0xFFb892ff);
+                      });
+                    },
+                    child: Container(
+                      width: 30,
+                      height: 30,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          color: Color(0xFFb892ff)),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        color = Color(0xFFedf67d);
+                      });
+                    },
+                    child: Container(
+                      width: 30,
+                      height: 30,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          color: Color(0xFFedf67d)),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        color = Color(0xFF858ae3);
+                      });
+                    },
+                    child: Container(
+                      width: 30,
+                      height: 30,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          color: Color(0xFF858ae3)),
+                    ),
+                  )
+                ],
+              ),
+              SizedBox(
+                height: size.height * 0.03,
               ),
               TextField(
                 autofocus: true,
@@ -46,11 +126,11 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                     labelText: 'Task Title',
                     prefixIcon: const Icon(Icons.text_fields),
                     border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(size.height * 0.03),
                         borderSide: const BorderSide(color: Colors.black26))),
               ),
-              const SizedBox(
-                height: 20,
+              SizedBox(
+                height: size.height * 0.02,
               ),
               TextField(
                 minLines: 3,
@@ -61,11 +141,14 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                     labelText: 'Description...',
                     prefixIcon: const Icon(Icons.text_fields),
                     border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(size.height * 0.03),
                         borderSide: const BorderSide(color: Colors.black26))),
               ),
+              SizedBox(
+                height: size.height * 0.02,
+              ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
+                padding: EdgeInsets.symmetric(horizontal: size.height * 0.01),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -79,17 +162,18 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                                   ? Colors.black
                                   : Colors.white,
                             ))),
-                    const SizedBox(
-                      width: 20,
+                    SizedBox(
+                      width: size.width * 0.02,
                     ),
                     Expanded(
                       child: ElevatedButton(
                         onPressed: () {
                           var task = Task(
-                              id: GUIDGen.generate(),
-                              title: titleController.text,
-                              regDate: DateTime.now().toString(),
-                              description: descriptionController.text);
+                            id: GUIDGen.generate(),
+                            title: titleController.text,
+                            regDate: DateTime.now().toString(),
+                            description: descriptionController.text,
+                          );
                           context
                               .read<TasksBloc>()
                               .add(AddTaskEvent(task: task));
