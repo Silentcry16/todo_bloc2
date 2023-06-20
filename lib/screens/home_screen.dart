@@ -1,3 +1,6 @@
+import 'dart:developer';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 import 'package:todo_bloc2/widgets/app_text.dart';
@@ -27,50 +30,52 @@ class _HomeScreenState extends State<HomeScreen> {
     BottomNavIndex.completedIndex: _completedScreenKey,
   };
 
-  final List<int> routeHistoryList = [0];
+  final List<int> routeHistoryList = [
+    0,
+  ];
 
   Future<bool> _onWillPop() async {
     if (navigationMapper[currentIndex]!.currentState!.canPop()) {
       navigationMapper[currentIndex]!.currentState!.pop();
     } else if (routeHistoryList.length > 1) {
       setState(() {
+        log('Removed ${routeHistoryList.last}from$routeHistoryList');
         routeHistoryList.remove(routeHistoryList.last);
+        log('moved ${routeHistoryList.last}from$routeHistoryList');
+
         currentIndex = routeHistoryList.last;
       });
     } else if (routeHistoryList.length == 1) {
-      setState(() {
-        currentIndex = routeHistoryList.first;
-      });
-    } else {
-      // If there are no screens to go back to, show an exit dialog
-      await showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: const Text('Exit'),
-            content: const Text('Are you sure you want to exit the app?'),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop(false); // Stay in the app
-                },
-                child: const Text('Cancel'),
-              ),
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop(true); // Exit the dialog
-                },
-                child: const Text('Exit'),
-              ),
-            ],
-          );
-        },
-      ).then((exit) {
-        if (exit == true) {
-          // Use exit(0) to exit the Flutter application
-          exit(0);
-        }
-      });
+      showDialog(
+          context: context,
+          builder: (context) {
+            return BlocBuilder<SwitchBloc, SwitchState>(
+              builder: (context, state) {
+                return AlertDialog(
+                  title: const Text('Exit'),
+                  content: const Text('Are you sure you want to exit the app?'),
+                  actions: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop(false); // Stay in the app
+                      },
+                      child: AppText(
+                        text: 'Cancel',
+                        color: state.switchValue ? Colors.white : Colors.black,
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () => exit(0),
+                      child: AppText(
+                        text: 'Exit',
+                        color: state.switchValue ? Colors.white : Colors.black,
+                      ),
+                    ),
+                  ],
+                );
+              },
+            );
+          });
     }
 
     return false;
@@ -165,7 +170,16 @@ class _HomeScreenState extends State<HomeScreen> {
                               : FontWeight.normal,
                         ),
                         onPressed: (() => setState(
-                              () => currentIndex = BottomNavIndex.tasksIndex,
+                              () => [
+                                currentIndex = BottomNavIndex.tasksIndex,
+                                if (!routeHistoryList
+                                    .contains(BottomNavIndex.tasksIndex))
+                                  {
+                                    routeHistoryList
+                                        .add(BottomNavIndex.tasksIndex),
+                                    log('added${routeHistoryList.last}to the $routeHistoryList')
+                                  }
+                              ],
                             )),
                         icon: currentIndex == BottomNavIndex.tasksIndex
                             ? const Icon(
@@ -198,7 +212,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                     .contains(BottomNavIndex.completedIndex))
                                   {
                                     routeHistoryList
-                                        .add(BottomNavIndex.completedIndex)
+                                        .add(BottomNavIndex.completedIndex),
+                                    log('added${routeHistoryList.last}to the $routeHistoryList')
                                   }
                               ],
                             )),
