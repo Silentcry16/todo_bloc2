@@ -35,71 +35,67 @@ class PopUpMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return task.isDeleted == false
-        ? BlocBuilder<SwitchBloc, SwitchState>(
-            builder: (context, state) {
-              return PopupMenuButton(
-                itemBuilder: (context) => [
-                  PopupMenuItem(
-                    child: InkWell(
-                      onTap: () => editTask(context),
-                      child: ListTile(
-                        leading: const Icon(Icons.edit),
-                        title: AppText(
-                          text: 'Edit',
-                          color:
-                              state.switchValue ? Colors.white : Colors.black,
-                        ),
-                      ),
+    return BlocBuilder<SwitchBloc, SwitchState>(
+      builder: (context, state) {
+        if (task.isDeleted == true) {
+          return PopupMenuButton(
+            key: key,
+            itemBuilder: (BuildContext context) => [
+              PopupMenuItem(
+                  onTap: () => context
+                      .read<TasksBloc>()
+                      .add(RestoreTaskEvent(task: task)),
+                  child: ListTile(
+                    leading: const Icon(Icons.restart_alt_rounded),
+                    title: AppText(
+                      text: 'Restore',
+                      color: state.switchValue ? Colors.white : Colors.black,
                     ),
+                  )),
+              PopupMenuItem(
+                onTap: () =>
+                    context.read<TasksBloc>().add(DeleteTaskEvent(task: task)),
+                child: ListTile(
+                  leading: const Icon(Icons.delete_forever),
+                  title: AppText(
+                    text: 'Delete forever',
+                    color: state.switchValue ? Colors.white : Colors.black,
                   ),
-                  PopupMenuItem(
-                    onTap: () => context
-                        .read<TasksBloc>()
-                        .add(RemoveTaskEvent(task: task)),
-                    child: ListTile(
-                      leading: const Icon(Icons.delete),
-                      title: AppText(
-                        text: 'Remove',
-                        color: state.switchValue ? Colors.white : Colors.black,
-                      ),
-                    ),
-                  ),
-                ],
-              );
-            },
-          )
-        : BlocBuilder<SwitchBloc, SwitchState>(
-            builder: (context, state) {
-              return PopupMenuButton(
-                itemBuilder: (context) => [
-                  PopupMenuItem(
-                      onTap: () => context
-                          .read<TasksBloc>()
-                          .add(RestoreTaskEvent(task: task)),
-                      child: ListTile(
-                        leading: const Icon(Icons.restart_alt_rounded),
-                        title: AppText(
-                          text: 'Restore',
-                          color:
-                              state.switchValue ? Colors.white : Colors.black,
-                        ),
-                      )),
-                  PopupMenuItem(
-                    onTap: () => context
-                        .read<TasksBloc>()
-                        .add(DeleteTaskEvent(task: task)),
-                    child: ListTile(
-                      leading: const Icon(Icons.delete_forever),
-                      title: AppText(
-                        text: 'Delete forever',
-                        color: state.switchValue ? Colors.white : Colors.black,
-                      ),
-                    ),
-                  ),
-                ],
-              );
-            },
+                ),
+              ),
+            ],
           );
+        } else {
+          return PopupMenuButton(
+            key: key,
+            itemBuilder: (context) => [
+              PopupMenuItem(
+                child: InkWell(
+                  onTap: () => editTask(context),
+                  child: ListTile(
+                    leading: const Icon(Icons.edit),
+                    title: AppText(
+                      text: 'Edit',
+                      color: state.switchValue ? Colors.white : Colors.black,
+                    ),
+                  ),
+                ),
+              ),
+              PopupMenuItem(
+                onTap: () =>
+                    context.read<TasksBloc>().add(RemoveTaskEvent(task: task)),
+                child: ListTile(
+                  leading: const Icon(Icons.delete),
+                  title: AppText(
+                    text: 'Remove',
+                    color: state.switchValue ? Colors.white : Colors.black,
+                  ),
+                ),
+              ),
+            ],
+          );
+        }
+      },
+    );
   }
 }

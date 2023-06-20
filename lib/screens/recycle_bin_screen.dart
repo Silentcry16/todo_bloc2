@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../blocs/bloc_exports.dart';
+import '../widgets/app_text.dart';
 import '../widgets/custom_drawer.dart';
 import '../widgets/task_list.dart';
 
@@ -10,6 +11,7 @@ class RecycleBinScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return BlocBuilder<TasksBloc, TasksState>(
       builder: (context, state) {
         return Scaffold(
@@ -20,7 +22,32 @@ class RecycleBinScreen extends StatelessWidget {
             title: const Text('Recycle Bin'),
             actions: [
               IconButton(
-                onPressed: () => context.read<TasksBloc>().add(DeleteAllTask()),
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      title: ListTile(
+                        leading: Icon(Icons.delete_forever_sharp,
+                            size: size.height * 0.04),
+                        title: AppText(
+                            text: 'Are you sure?', size: size.height * 0.03),
+                      ),
+                      content: const Text(
+                          'You are about to delete all the tasks, This action cannot be undone.'),
+                      actions: [
+                        TextButton(
+                            onPressed: () => Navigator.of(context).pop(),
+                            child: AppText(text: 'No')),
+                        TextButton(
+                            onPressed: () {
+                              context.read<TasksBloc>().add(DeleteAllTask());
+                              Navigator.of(context).pop();
+                            },
+                            child: AppText(text: 'Yes'))
+                      ],
+                    ),
+                  );
+                },
                 icon: const Icon(
                   Icons.delete_forever,
                   size: 30,

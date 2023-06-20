@@ -49,7 +49,7 @@ class _EditTaskState extends State<EditTask> {
                   IconButton(
                     onPressed: () {
                       setState(() {
-                        color = Color(0xFFffb7ff);
+                        color = const Color(0xFFffb7ff);
                       });
                     },
                     icon: Container(
@@ -57,13 +57,13 @@ class _EditTaskState extends State<EditTask> {
                       height: 30,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(30),
-                          color: Color(0xFFffb7ff)),
+                          color: const Color(0xFFffb7ff)),
                     ),
                   ),
                   IconButton(
                     onPressed: () {
                       setState(() {
-                        color = Color(0xFFffc2e2);
+                        color = const Color(0xFFffc2e2);
                       });
                     },
                     icon: Container(
@@ -71,13 +71,13 @@ class _EditTaskState extends State<EditTask> {
                       height: 30,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(30),
-                          color: Color(0xFFffc2e2)),
+                          color: const Color(0xFFffc2e2)),
                     ),
                   ),
                   IconButton(
                     onPressed: () {
                       setState(() {
-                        color = Color(0xFFb892ff);
+                        color = const Color(0xFFb892ff);
                       });
                     },
                     icon: Container(
@@ -85,13 +85,13 @@ class _EditTaskState extends State<EditTask> {
                       height: 30,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(30),
-                          color: Color(0xFFb892ff)),
+                          color: const Color(0xFFb892ff)),
                     ),
                   ),
                   IconButton(
                     onPressed: () {
                       setState(() {
-                        color = Color(0xFFedf67d);
+                        color = const Color(0xFFedf67d);
                       });
                     },
                     icon: Container(
@@ -99,13 +99,13 @@ class _EditTaskState extends State<EditTask> {
                       height: 30,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(30),
-                          color: Color(0xFFedf67d)),
+                          color: const Color(0xFFedf67d)),
                     ),
                   ),
                   IconButton(
                     onPressed: () {
                       setState(() {
-                        color = Color(0xFF858ae3);
+                        color = const Color(0xFF858ae3);
                       });
                     },
                     icon: Container(
@@ -113,7 +113,7 @@ class _EditTaskState extends State<EditTask> {
                       height: 30,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(30),
-                          color: Color(0xFF858ae3)),
+                          color: const Color(0xFF858ae3)),
                     ),
                   ),
                 ],

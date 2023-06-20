@@ -13,8 +13,9 @@ class AddTaskScreen extends StatefulWidget {
 
 class _AddTaskScreenState extends State<AddTaskScreen> {
   Color? color;
+  int colorIndex = 0;
 
-  List<Color> colorsList = [
+  List<Color> colorsList = const [
     Color(0xFFffb7ff),
     Color(0xFFffc2e2),
     Color(0xFFb892ff),
@@ -25,11 +26,12 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
     Color(0xFFffcbf2),
     Color(0xFFff6d00),
   ];
+
+  TextEditingController titleController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    TextEditingController titleController = TextEditingController();
-    TextEditingController descriptionController = TextEditingController();
     return Container(
       margin: EdgeInsets.only(bottom: size.height * 0.02),
       padding: EdgeInsets.all(size.height * 0.03),
@@ -52,19 +54,29 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
               SizedBox(
                 height: size.height * 0.03,
               ),
-              Container(
+              SizedBox(
                   height: size.height * 0.06,
                   width: size.width,
                   child: ListView.separated(
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, i) => IconButton(
-                            onPressed: () => color = colorsList[i],
+                            onPressed: () {
+                              setState(() {
+                                color = colorsList[i];
+                              });
+                              colorIndex = i;
+                            },
                             icon: Container(
-                              width: 30,
-                              height: 30,
+                              width: size.height * 0.06,
+                              height: size.height * 0.06,
                               decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(30),
-                                  color: colorsList[i]),
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: colorsList[i],
+                                  border: colorIndex == i
+                                      ? Border.all(
+                                          width: size.width * 0.01,
+                                          color: Colors.black26)
+                                      : null),
                             ),
                           ),
                       separatorBuilder: (context, index) => SizedBox(

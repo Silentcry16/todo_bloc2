@@ -23,6 +23,7 @@ class TaskList extends StatelessWidget {
                     children: taskList
                         .map(
                           (task) => ExpansionPanelRadio(
+                            canTapOnHeader: true,
                             backgroundColor: state.switchValue
                                 ? Colors.grey.shade800
                                 : task.color,
