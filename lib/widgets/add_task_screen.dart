@@ -13,6 +13,18 @@ class AddTaskScreen extends StatefulWidget {
 
 class _AddTaskScreenState extends State<AddTaskScreen> {
   Color? color;
+
+  List<Color> colorsList = [
+    Color(0xFFffb7ff),
+    Color(0xFFffc2e2),
+    Color(0xFFb892ff),
+    Color(0xFFedf67d),
+    Color(0xFF858ae3),
+    Color(0xFFf72585),
+    Color(0xFFff9e00),
+    Color(0xFFffcbf2),
+    Color(0xFFff6d00),
+  ];
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -40,61 +52,25 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
               SizedBox(
                 height: size.height * 0.03,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  IconButton(
-                    onPressed: () => color = Color(0xFFffb7ff),
-                    icon: Container(
-                      width: 30,
-                      height: 30,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          color: Color(0xFFffb7ff)),
-                    ),
-                  ),
-                  IconButton(
-                    onPressed: () => color = Color(0xFFffc2e2),
-                    icon: Container(
-                      width: 30,
-                      height: 30,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          color: Color(0xFFffc2e2)),
-                    ),
-                  ),
-                  IconButton(
-                    onPressed: () => color = Color(0xFFb892ff),
-                    icon: Container(
-                      width: 30,
-                      height: 30,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          color: Color(0xFFb892ff)),
-                    ),
-                  ),
-                  IconButton(
-                    onPressed: () => color = Color(0xFFedf67d),
-                    icon: Container(
-                      width: 30,
-                      height: 30,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          color: Color(0xFFedf67d)),
-                    ),
-                  ),
-                  IconButton(
-                    onPressed: () => color = Color(0xFF858ae3),
-                    icon: Container(
-                      width: 30,
-                      height: 30,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          color: Color(0xFF858ae3)),
-                    ),
-                  ),
-                ],
-              ),
+              Container(
+                  height: size.height * 0.06,
+                  width: size.width,
+                  child: ListView.separated(
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, i) => IconButton(
+                            onPressed: () => color = colorsList[i],
+                            icon: Container(
+                              width: 30,
+                              height: 30,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(30),
+                                  color: colorsList[i]),
+                            ),
+                          ),
+                      separatorBuilder: (context, index) => SizedBox(
+                            width: size.height * 0.02,
+                          ),
+                      itemCount: colorsList.length)),
               SizedBox(
                 height: size.height * 0.03,
               ),
@@ -180,3 +156,60 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
     );
   }
 }
+
+
+//  Row(
+//                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                 children: [
+//                   IconButton(
+//                     onPressed: () => color = Color(0xFFffb7ff),
+//                     icon: Container(
+//                       width: 30,
+//                       height: 30,
+//                       decoration: BoxDecoration(
+//                           borderRadius: BorderRadius.circular(30),
+//                           color: Color(0xFFffb7ff)),
+//                     ),
+//                   ),
+//                   IconButton(
+//                     onPressed: () => color = Color(0xFFffc2e2),
+//                     icon: Container(
+//                       width: 30,
+//                       height: 30,
+//                       decoration: BoxDecoration(
+//                           borderRadius: BorderRadius.circular(30),
+//                           color: Color(0xFFffc2e2)),
+//                     ),
+//                   ),
+//                   IconButton(
+//                     onPressed: () => color = Color(0xFFb892ff),
+//                     icon: Container(
+//                       width: 30,
+//                       height: 30,
+//                       decoration: BoxDecoration(
+//                           borderRadius: BorderRadius.circular(30),
+//                           color: Color(0xFFb892ff)),
+//                     ),
+//                   ),
+//                   IconButton(
+//                     onPressed: () => color = Color(0xFFedf67d),
+//                     icon: Container(
+//                       width: 30,
+//                       height: 30,
+//                       decoration: BoxDecoration(
+//                           borderRadius: BorderRadius.circular(30),
+//                           color: Color(0xFFedf67d)),
+//                     ),
+//                   ),
+//                   IconButton(
+//                     onPressed: () => color = Color(0xFF858ae3),
+//                     icon: Container(
+//                       width: 30,
+//                       height: 30,
+//                       decoration: BoxDecoration(
+//                           borderRadius: BorderRadius.circular(30),
+//                           color: Color(0xFF858ae3)),
+//                     ),
+//                   ),
+//                 ],
+//               ),

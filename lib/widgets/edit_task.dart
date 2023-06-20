@@ -13,7 +13,7 @@ class EditTask extends StatefulWidget {
 }
 
 class _EditTaskState extends State<EditTask> {
-   Color? color;
+  Color? color;
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -164,7 +164,7 @@ class _EditTaskState extends State<EditTask> {
                               var task = Task(
                                   id: GUIDGen.generate(),
                                   title: titleController.text,
-                                  color: color!,
+                                  color: color,
                                   regDate: DateTime.now().toString(),
                                   isDeleted: false,
                                   isDone: false,

@@ -91,55 +91,6 @@ class TasksBloc extends HydratedBloc<TasksEvent, TasksState> {
     );
   }
 
-  // void _onIsFavoriteTask(
-  //     IsfavoriteTaskEvent event, Emitter<TasksState> emit) async {
-  //   final state = this.state;
-  //   final task = event.task;
-
-  //   List<Task> pendingTasks = state.pendingTasks;
-  //   List<Task> completedTasks = state.completedTasks;
-  //   List<Task> favoriteTasks = state.favoriteTasks;
-
-  //   if (task.isDone == false) {
-  //     if (task.isFavorite == false) {
-  //       var taskIndex = pendingTasks.indexOf(task);
-  //       pendingTasks = List.from(pendingTasks)
-  //         ..remove(task)
-  //         ..insert(taskIndex, task.copyWith(isFavorite: true));
-  //       favoriteTasks.add(task.copyWith(isFavorite: true));
-  //     } else {
-  //       var taskIndex = pendingTasks.indexOf(task);
-  //       pendingTasks = List.from(pendingTasks)
-  //         ..remove(task)
-  //         ..insert(taskIndex, task.copyWith(isFavorite: false));
-  //       favoriteTasks.remove(task);
-  //     }
-  //   } else {
-  //     if (task.isFavorite == false) {
-  //       var taskIndex = completedTasks.indexOf(task);
-  //       completedTasks = List.from(completedTasks)
-  //         ..remove(task)
-  //         ..insert(taskIndex, task.copyWith(isFavorite: true));
-  //       favoriteTasks.insert(0, task.copyWith(isFavorite: true));
-  //     } else {
-  //       var taskIndex = completedTasks.indexOf(task);
-  //       completedTasks = List.from(completedTasks)
-  //         ..remove(task)
-  //         ..insert(taskIndex, task.copyWith(isFavorite: false));
-  //       favoriteTasks.remove(task);
-  //     }
-  //   }
-
-  //   emit(
-  //     TasksState(
-  //       pendingTasks: pendingTasks,
-  //       completedTasks: completedTasks,
-  //       favoriteTasks: favoriteTasks,
-  //       removedTasks: state.removedTasks,
-  //     ),
-  //   );
-  // }
-
   void _onRestoreTask(RestoreTaskEvent event, Emitter<TasksState> emit) {
     final state = this.state;
     final task = event.task;
