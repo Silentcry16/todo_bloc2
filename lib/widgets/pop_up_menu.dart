@@ -39,8 +39,7 @@ class PopUpMenu extends StatelessWidget {
       builder: (context, state) {
         if (task.isDeleted == true) {
           return PopupMenuButton(
-            key: key,
-            itemBuilder: (BuildContext context) => [
+            key: key,            itemBuilder: (BuildContext context) => [
               PopupMenuItem(
                   onTap: () => context
                       .read<TasksBloc>()

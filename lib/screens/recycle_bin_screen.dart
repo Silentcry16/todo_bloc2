@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_launcher_icons/xml_templates.dart';
 
 import '../blocs/bloc_exports.dart';
 import '../widgets/app_text.dart';
@@ -8,7 +7,9 @@ import '../widgets/task_list.dart';
 import 'home_screen.dart';
 
 class RecycleBinScreen extends StatelessWidget {
-  const RecycleBinScreen({super.key});
+  const RecycleBinScreen({
+    super.key,
+  });
   static const id = 'recycle_bin_screen';
 
   @override
@@ -94,7 +95,6 @@ class RecycleBinScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                //opens the BottomSheet to add a new task
               ),
             );
           },

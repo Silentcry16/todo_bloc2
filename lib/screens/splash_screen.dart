@@ -58,7 +58,12 @@ class _SplashScreenState extends State<SplashScreen> {
             const Spacer(flex: 2),
             SizedBox(
               width: size.width / 3,
-              child: Image.asset(Assets.images.autherLogo.path),
+              child: Opacity(
+                opacity: 0.5,
+                child: Image.asset(
+                  Assets.images.autherLogo.path,
+                ),
+              ),
             ),
             SizedBox(
               height: size.height * 0.05,

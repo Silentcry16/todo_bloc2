@@ -34,6 +34,8 @@ class _PendingScreenState extends State<PendingScreen> {
 
   final TextEditingController searchController = TextEditingController();
 
+  late final Task task;
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;

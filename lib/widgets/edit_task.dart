@@ -14,13 +14,35 @@ class EditTask extends StatefulWidget {
 
 class _EditTaskState extends State<EditTask> {
   Color? color;
+  late TextEditingController titleController;
+  late TextEditingController descriptionController;
+
+  int colorIndex = 0;
+
+  List<Color> colorsList = const [
+    Color(0xFFffb7ff),
+    Color(0xFFffc2e2),
+    Color(0xFFb892ff),
+    Color(0xFFedf67d),
+    Color(0xFF858ae3),
+    Color(0xFFf72585),
+    Color(0xFFff9e00),
+    Color(0xFFffcbf2),
+    Color(0xFFff6d00),
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+    titleController = TextEditingController(text: widget.oldtask.title);
+    descriptionController =
+        TextEditingController(text: widget.oldtask.description);
+  }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    TextEditingController titleController =
-        TextEditingController(text: widget.oldtask.title);
-    TextEditingController descriptionController =
-        TextEditingController(text: widget.oldtask.description);
+
     return BlocBuilder<SwitchBloc, SwitchState>(
       builder: (context, state) {
         return Container(
@@ -43,81 +65,35 @@ class _EditTaskState extends State<EditTask> {
               SizedBox(
                 height: size.height * 0.03,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  IconButton(
-                    onPressed: () {
-                      setState(() {
-                        color = const Color(0xFFffb7ff);
-                      });
-                    },
-                    icon: Container(
-                      width: 30,
-                      height: 30,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          color: const Color(0xFFffb7ff)),
-                    ),
-                  ),
-                  IconButton(
-                    onPressed: () {
-                      setState(() {
-                        color = const Color(0xFFffc2e2);
-                      });
-                    },
-                    icon: Container(
-                      width: 30,
-                      height: 30,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          color: const Color(0xFFffc2e2)),
-                    ),
-                  ),
-                  IconButton(
-                    onPressed: () {
-                      setState(() {
-                        color = const Color(0xFFb892ff);
-                      });
-                    },
-                    icon: Container(
-                      width: 30,
-                      height: 30,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          color: const Color(0xFFb892ff)),
-                    ),
-                  ),
-                  IconButton(
-                    onPressed: () {
-                      setState(() {
-                        color = const Color(0xFFedf67d);
-                      });
-                    },
-                    icon: Container(
-                      width: 30,
-                      height: 30,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          color: const Color(0xFFedf67d)),
-                    ),
-                  ),
-                  IconButton(
-                    onPressed: () {
-                      setState(() {
-                        color = const Color(0xFF858ae3);
-                      });
-                    },
-                    icon: Container(
-                      width: 30,
-                      height: 30,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          color: const Color(0xFF858ae3)),
-                    ),
-                  ),
-                ],
-              ),
+              SizedBox(
+                  height: size.height * 0.06,
+                  width: size.width,
+                  child: ListView.separated(
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, i) => IconButton(
+                            onPressed: () {
+                              setState(() {
+                                color = colorsList[i];
+                              });
+                              colorIndex = i;
+                            },
+                            icon: Container(
+                              width: size.height * 0.06,
+                              height: size.height * 0.06,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: colorsList[i],
+                                  border: colorIndex == i
+                                      ? Border.all(
+                                          width: size.width * 0.01,
+                                          color: Colors.black26)
+                                      : null),
+                            ),
+                          ),
+                      separatorBuilder: (context, index) => SizedBox(
+                            width: size.height * 0.02,
+                          ),
+                      itemCount: colorsList.length)),
               SizedBox(
                 height: size.height * 0.03,
               ),
@@ -164,7 +140,7 @@ class _EditTaskState extends State<EditTask> {
                               var task = Task(
                                   id: GUIDGen.generate(),
                                   title: titleController.text,
-                                  color: color,
+                                  color: color ?? const Color(0xFFedf67d),
                                   regDate: DateTime.now().toString(),
                                   isDeleted: false,
                                   isDone: false,

@@ -139,7 +139,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                           var task = Task(
                             id: GUIDGen.generate(),
                             title: titleController.text,
-                            color: color ?? Colors.white,
+                            color: color ?? const Color(0xFFedf67d),
                             regDate: DateTime.now().toString(),
                             description: descriptionController.text,
                           );
@@ -168,60 +168,3 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
     );
   }
 }
-
-
-//  Row(
-//                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                 children: [
-//                   IconButton(
-//                     onPressed: () => color = Color(0xFFffb7ff),
-//                     icon: Container(
-//                       width: 30,
-//                       height: 30,
-//                       decoration: BoxDecoration(
-//                           borderRadius: BorderRadius.circular(30),
-//                           color: Color(0xFFffb7ff)),
-//                     ),
-//                   ),
-//                   IconButton(
-//                     onPressed: () => color = Color(0xFFffc2e2),
-//                     icon: Container(
-//                       width: 30,
-//                       height: 30,
-//                       decoration: BoxDecoration(
-//                           borderRadius: BorderRadius.circular(30),
-//                           color: Color(0xFFffc2e2)),
-//                     ),
-//                   ),
-//                   IconButton(
-//                     onPressed: () => color = Color(0xFFb892ff),
-//                     icon: Container(
-//                       width: 30,
-//                       height: 30,
-//                       decoration: BoxDecoration(
-//                           borderRadius: BorderRadius.circular(30),
-//                           color: Color(0xFFb892ff)),
-//                     ),
-//                   ),
-//                   IconButton(
-//                     onPressed: () => color = Color(0xFFedf67d),
-//                     icon: Container(
-//                       width: 30,
-//                       height: 30,
-//                       decoration: BoxDecoration(
-//                           borderRadius: BorderRadius.circular(30),
-//                           color: Color(0xFFedf67d)),
-//                     ),
-//                   ),
-//                   IconButton(
-//                     onPressed: () => color = Color(0xFF858ae3),
-//                     icon: Container(
-//                       width: 30,
-//                       height: 30,
-//                       decoration: BoxDecoration(
-//                           borderRadius: BorderRadius.circular(30),
-//                           color: Color(0xFF858ae3)),
-//                     ),
-//                   ),
-//                 ],
-//               ),

@@ -258,5 +258,4 @@ class BottomNavIndex {
   BottomNavIndex._();
   static const int tasksIndex = 0;
   static const int completedIndex = 1;
-  // static const int favoriteIndex = 2;
 }
