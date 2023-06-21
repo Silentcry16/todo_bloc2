@@ -99,10 +99,10 @@ class _PendingScreenState extends State<PendingScreen> {
                         )
                 ],
               ),
-              //opens the BottomSheet to add a new task
-              floatingActionButton: FloatingActionButton(
-                  onPressed: () => _addTask(context),
-                  child: const Icon(Icons.add)),
+              // //opens the BottomSheet to add a new task
+              // floatingActionButton: FloatingActionButton(
+              //     onPressed: () => _addTask(context),
+              //     child: const Icon(Icons.add)),
             );
           },
         );

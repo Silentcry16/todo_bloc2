@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:todo_bloc2/models/task.dart';
 
 import 'package:todo_bloc2/widgets/app_text.dart';
 
@@ -12,7 +13,9 @@ import 'completed_tasks_screen.dart';
 import 'pending_screen.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({
+    Key? key,
+  }) : super(key: key);
 
   static const id = 'home_screen';
 
@@ -96,13 +99,13 @@ class _HomeScreenState extends State<HomeScreen> {
               ? AppText(
                   text: 'Pending Screen',
                   color: Colors.white,
-                  size: MediaQuery.of(context).size.height * 0.02,
+                  size: MediaQuery.of(context).size.height * 0.025,
                   weight: FontWeight.bold,
                 )
               : AppText(
                   text: 'Completed Tasks',
                   color: Colors.white,
-                  size: MediaQuery.of(context).size.height * 0.02,
+                  size: MediaQuery.of(context).size.height * 0.025,
                   weight: FontWeight.bold,
                 ),
           actions: [
@@ -115,6 +118,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 : const SizedBox.shrink()
           ],
         ),
+        //this is where I have used IndexedStack to show each screen
         body: SafeArea(
           child: Stack(
             children: [
@@ -142,93 +146,94 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
         ),
+
         bottomNavigationBar: BlocBuilder<SwitchBloc, SwitchState>(
           builder: (context, state) {
             return Container(
-              margin: EdgeInsets.only(
-                  left: size.height * 0.015,
-                  right: size.height * 0.015,
-                  bottom: size.height * 0.015),
+              alignment: Alignment.center,
+              margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               decoration: BoxDecoration(
-                  color:
-                      state.switchValue ? Colors.grey : const Color(0xFF7b2cbf),
-                  borderRadius: BorderRadius.circular(size.height * 0.02)),
-              height: size.height * 0.075,
-              width: double.infinity,
+                borderRadius: BorderRadius.circular(40),
+                color: state.switchValue
+                    ? Colors.grey.shade900
+                    : const Color(0xFFca7df9),
+              ),
+              height: size.height * 0.08,
+              width: size.width,
               child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Expanded(
-                    child: TextButton.icon(
-                        label: AppText(
-                          text: 'Pending',
-                          color: Colors.white,
-                          size: currentIndex == BottomNavIndex.tasksIndex
-                              ? 18
-                              : 15,
-                          weight: currentIndex == BottomNavIndex.tasksIndex
-                              ? FontWeight.bold
-                              : FontWeight.normal,
-                        ),
-                        onPressed: (() => setState(
-                              () => [
-                                currentIndex = BottomNavIndex.tasksIndex,
-                                if (!routeHistoryList
-                                    .contains(BottomNavIndex.tasksIndex))
-                                  {
-                                    routeHistoryList
-                                        .add(BottomNavIndex.tasksIndex),
-                                    log('added${routeHistoryList.last}to the $routeHistoryList')
-                                  }
-                              ],
+                  IconButton(
+                      onPressed: (() => setState(
+                            () => [
+                              currentIndex = BottomNavIndex.tasksIndex,
+
+                              //if the taskIndex is not in the routHistoryList, we add it, otherwise it goes to the next line
+                              if (!routeHistoryList
+                                  .contains(BottomNavIndex.tasksIndex))
+                                {
+                                  routeHistoryList
+                                      .add(BottomNavIndex.tasksIndex),
+                                  log('added${routeHistoryList.last}to the $routeHistoryList')
+                                }
+                            ],
+                          )),
+                      icon: currentIndex == BottomNavIndex.tasksIndex
+                          ? Icon(
+                              Icons.list,
+                              color: Colors.white,
+                              size: size.height * 0.045,
+                            )
+                          : Icon(
+                              Icons.list,
+                              color: Colors.white70,
+                              size: size.height * 0.040,
                             )),
-                        icon: currentIndex == BottomNavIndex.tasksIndex
-                            ? const Icon(
-                                Icons.list,
-                                color: Colors.white,
-                                size: 35,
-                              )
-                            : const Icon(
-                                Icons.list,
-                                color: Colors.white70,
-                                size: 30,
-                              )),
+                  Container(
+                    height: size.height * 0.08,
+                    width: size.height * 0.08,
+                    decoration: BoxDecoration(
+                        color: state.switchValue
+                            ? Colors.grey.shade800
+                            : Colors.purple.shade700.withOpacity(0.4),
+                        borderRadius:
+                            BorderRadius.circular(size.height * 0.08)),
+                    child: IconButton(
+                      onPressed: () => _addTask(context),
+                      icon: Icon(
+                        Icons.add,
+                        color: Colors.white,
+                        size: size.height * 0.045,
+                      ),
+                    ),
                   ),
-                  Expanded(
-                    child: TextButton.icon(
-                        label: AppText(
-                          text: 'Completed',
-                          color: Colors.white,
-                          size: currentIndex == BottomNavIndex.completedIndex
-                              ? 18
-                              : 15,
-                          weight: currentIndex == BottomNavIndex.completedIndex
-                              ? FontWeight.bold
-                              : FontWeight.normal,
-                        ),
-                        onPressed: (() => setState(
-                              () => [
-                                currentIndex = BottomNavIndex.completedIndex,
-                                if (!routeHistoryList
-                                    .contains(BottomNavIndex.completedIndex))
-                                  {
-                                    routeHistoryList
-                                        .add(BottomNavIndex.completedIndex),
-                                    log('added${routeHistoryList.last}to the $routeHistoryList')
-                                  }
-                              ],
+                  IconButton(
+                      onPressed: (() => setState(
+                            () => [
+                              currentIndex = BottomNavIndex.completedIndex,
+                              //if the completedIndex is not in the routHistoryList, we add it, otherwise it goes to the next line
+
+                              if (!routeHistoryList
+                                  .contains(BottomNavIndex.completedIndex))
+                                {
+                                  routeHistoryList
+                                      .add(BottomNavIndex.completedIndex),
+                                  log('added${routeHistoryList.last}to the $routeHistoryList')
+                                }
+                            ],
+                          )),
+                      icon: currentIndex == BottomNavIndex.completedIndex
+                          ? Icon(
+                              Icons.done,
+                              color: Colors.white,
+                              size: size.height * 0.045,
+                            )
+                          : Icon(
+                              Icons.done,
+                              color: Colors.white70,
+                              size: size.height * 0.040,
                             )),
-                        icon: currentIndex == BottomNavIndex.completedIndex
-                            ? const Icon(
-                                Icons.done,
-                                color: Colors.white,
-                                size: 35,
-                              )
-                            : const Icon(
-                                Icons.done,
-                                color: Colors.white70,
-                                size: 30,
-                              )),
-                  ),
                 ],
               ),
             );
