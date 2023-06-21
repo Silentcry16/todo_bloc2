@@ -53,6 +53,7 @@ class TaskList extends StatelessWidget {
                     width: size.width / 2,
                     child: Column(
                       children: [
+                        //ListTile Header
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -97,17 +98,21 @@ class TaskList extends StatelessWidget {
                                   ? const Icon(Icons.restart_alt)
                                   : const Icon(Icons.edit),
                             ),
-                            IconButton(
-                              onPressed: () => context
-                                  .read<TasksBloc>()
-                                  .add(UpdateTaskEvent(task: task)),
-                              icon: task.isDone == true
-                                  ? const Icon(Icons.check_box_outlined)
-                                  : const Icon(Icons.check_box_outline_blank),
-                            ),
+                            task.isDeleted == false
+                                ? IconButton(
+                                    onPressed: () => context
+                                        .read<TasksBloc>()
+                                        .add(UpdateTaskEvent(task: task)),
+                                    icon: task.isDone == true
+                                        ? const Icon(Icons.check_box_outlined)
+                                        : const Icon(
+                                            Icons.check_box_outline_blank),
+                                  )
+                                : SizedBox.shrink(),
                           ],
                         ),
                         const SizedBox(height: 5),
+                        //registerationdate
                         Container(
                           margin: const EdgeInsets.symmetric(horizontal: 15),
                           child: AppText(
