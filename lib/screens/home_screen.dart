@@ -2,7 +2,6 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:todo_bloc2/models/task.dart';
 
 import 'package:todo_bloc2/widgets/app_text.dart';
 

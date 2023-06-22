@@ -4,7 +4,6 @@ import 'package:todo_bloc2/models/task.dart';
 import 'package:todo_bloc2/widgets/task_counter.dart';
 
 import '../blocs/bloc_exports.dart';
-import '../widgets/add_task_screen.dart';
 import '../widgets/task_list.dart';
 
 class PendingScreen extends StatefulWidget {
@@ -17,21 +16,6 @@ class PendingScreen extends StatefulWidget {
 }
 
 class _PendingScreenState extends State<PendingScreen> {
-  void _addTask(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      builder: (context) {
-        return SingleChildScrollView(
-          child: Container(
-              padding: EdgeInsets.only(
-                  bottom: MediaQuery.of(context).viewInsets.bottom),
-              child: const AddTaskScreen()),
-        );
-      },
-    );
-  }
-
   final TextEditingController searchController = TextEditingController();
 
   late final Task task;

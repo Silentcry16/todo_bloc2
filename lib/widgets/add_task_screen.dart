@@ -136,7 +136,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                     Expanded(
                       child: ElevatedButton(
                         onPressed: () {
-                          if (!titleController.text.isEmpty) {
+                          if (titleController.text.isNotEmpty) {
                             var task = Task(
                               id: GUIDGen.generate(),
                               title: titleController.text,

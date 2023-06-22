@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:todo_bloc2/widgets/recycle_bin_task_list.dart';
 
 import '../blocs/bloc_exports.dart';
 import '../widgets/app_text.dart';
 import '../widgets/custom_drawer.dart';
-import '../widgets/task_list.dart';
 import 'home_screen.dart';
 
 class RecycleBinScreen extends StatelessWidget {
@@ -39,8 +39,8 @@ class RecycleBinScreen extends StatelessWidget {
                             context: context,
                             builder: (context) => AlertDialog(
                               title: ListTile(
-                                leading: Icon(Icons.delete_forever_sharp,
-                                    size: size.height * 0.04),
+                                leading: Icon(Icons.close,
+                                    size: size.height * 0.045),
                                 title: Text(
                                   'Are you sure?',
                                   style:
@@ -90,7 +90,7 @@ class RecycleBinScreen extends StatelessWidget {
                         child: Chip(
                             label: Text(
                                 '${state.removedTasks.length} Tasks Removed'))),
-                    TaskList(
+                    RecycleBinTaskList(
                       taskList: state.removedTasks,
                     ),
                   ],

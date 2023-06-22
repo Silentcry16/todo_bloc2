@@ -16,6 +16,45 @@ class ListItem extends StatelessWidget {
   final Task task;
   final Size size;
 
+  void deleteTask(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => BlocBuilder<SwitchBloc, SwitchState>(
+        builder: (context, state2) {
+          return AlertDialog(
+            title: ListTile(
+              leading:
+                  Icon(Icons.delete_forever_sharp, size: size.height * 0.04),
+              title: Text(
+                'Are you sure?',
+                style: TextStyle(fontSize: size.height * 0.03),
+              ),
+            ),
+            content: const Text(
+                'You are about to delete This tasks, This action cannot be undone.'),
+            actions: [
+              TextButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  child: AppText(
+                    text: 'No',
+                    color: state2.switchValue ? Colors.white : Colors.black,
+                  )),
+              TextButton(
+                  onPressed: () {
+                    context.read<TasksBloc>().add(DeleteTaskEvent(task: task));
+                    Navigator.pop(context);
+                  },
+                  child: AppText(
+                    text: 'Yes',
+                    color: state2.switchValue ? Colors.white : Colors.black,
+                  ))
+            ],
+          );
+        },
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     DateTime time = DateTime.parse(task.regDate);
@@ -46,9 +85,7 @@ class ListItem extends StatelessWidget {
                   IconButton(
                     onPressed: () {
                       task.isDeleted == true
-                          ? context
-                              .read<TasksBloc>()
-                              .add(DeleteTaskEvent(task: task))
+                          ? deleteTask(context)
                           : context
                               .read<TasksBloc>()
                               .add(RemoveTaskEvent(task: task));
@@ -92,7 +129,7 @@ class ListItem extends StatelessWidget {
                               ? const Icon(Icons.check_box_outlined)
                               : const Icon(Icons.check_box_outline_blank),
                         )
-                      : SizedBox.shrink(),
+                      : const SizedBox.shrink(),
                 ],
               ),
               const SizedBox(height: 5),
@@ -125,7 +162,7 @@ class ListItem extends StatelessWidget {
                       context: context,
                       builder: (context) => SimpleDialog(
                             elevation: 10,
-                            contentPadding: EdgeInsets.all(20),
+                            contentPadding: const EdgeInsets.all(20),
                             backgroundColor: state.switchValue
                                 ? Colors.grey.shade700
                                 : task.color,

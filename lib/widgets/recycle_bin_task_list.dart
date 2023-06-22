@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:todo_bloc2/widgets/list_item.dart';
 import '../models/task.dart';
 
-class TaskList extends StatelessWidget {
-  const TaskList({
+class RecycleBinTaskList extends StatelessWidget {
+  const RecycleBinTaskList({
     super.key,
     required this.taskList,
   });
@@ -16,7 +16,7 @@ class TaskList extends StatelessWidget {
       child: SingleChildScrollView(
         child: Container(
           width: size.width,
-          height: size.height * 0.72,
+          height: size.height * 0.82,
           margin: EdgeInsets.symmetric(
             horizontal: size.width * 0.03,
           ),
