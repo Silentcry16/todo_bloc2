@@ -16,10 +16,10 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
   int colorIndex = 0;
 
   List<Color> colorsList = const [
+    Color(0xFFedf67d),
     Color(0xFFffb7ff),
     Color(0xFFffc2e2),
     Color(0xFFb892ff),
-    Color(0xFFedf67d),
     Color(0xFF858ae3),
     Color(0xFFf72585),
     Color(0xFFff9e00),
@@ -121,15 +121,16 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Expanded(
-                        child: ElevatedButton(
-                            onPressed: () => Navigator.of(context).pop(),
-                            child: AppText(
-                              text: 'Cancell',
-                              weight: FontWeight.bold,
-                              color: state.switchValue
-                                  ? Colors.black
-                                  : Colors.white,
-                            ))),
+                      child: ElevatedButton(
+                        onPressed: () => Navigator.of(context).pop(),
+                        child: AppText(
+                          text: 'Cancell',
+                          weight: FontWeight.bold,
+                          color:
+                              state.switchValue ? Colors.black : Colors.white,
+                        ),
+                      ),
+                    ),
                     SizedBox(
                       width: size.width * 0.02,
                     ),

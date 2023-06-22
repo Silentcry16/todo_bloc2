@@ -20,10 +20,10 @@ class _EditTaskState extends State<EditTask> {
   int colorIndex = 0;
 
   List<Color> colorsList = const [
+    Color(0xFFedf67d),
     Color(0xFFffb7ff),
     Color(0xFFffc2e2),
     Color(0xFFb892ff),
-    Color(0xFFedf67d),
     Color(0xFF858ae3),
     Color(0xFFf72585),
     Color(0xFFff9e00),

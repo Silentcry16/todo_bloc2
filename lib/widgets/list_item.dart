@@ -30,8 +30,8 @@ class ListItem extends StatelessWidget {
                 style: TextStyle(fontSize: size.height * 0.03),
               ),
             ),
-            content: const Text(
-                'You are about to delete This tasks, This action cannot be undone.'),
+            content: Text(
+                'Are you sure you want to delete ${task.title} from recycle bin? This action cannot be undone.'),
             actions: [
               TextButton(
                   onPressed: () => Navigator.of(context).pop(),
@@ -41,7 +41,49 @@ class ListItem extends StatelessWidget {
                   )),
               TextButton(
                   onPressed: () {
-                    context.read<TasksBloc>().add(DeleteTaskEvent(task: task));
+                    context.read<TasksBloc>().add(
+                          DeleteTaskEvent(task: task),
+                        );
+                    Navigator.pop(context);
+                  },
+                  child: AppText(
+                    text: 'Yes',
+                    color: state2.switchValue ? Colors.white : Colors.black,
+                  ))
+            ],
+          );
+        },
+      ),
+    );
+  }
+
+  void removeTask(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => BlocBuilder<SwitchBloc, SwitchState>(
+        builder: (context, state2) {
+          return AlertDialog(
+            title: ListTile(
+              leading: Icon(Icons.warning, size: size.height * 0.04),
+              title: Text(
+                'Warning',
+                style: TextStyle(fontSize: size.height * 0.03),
+              ),
+            ),
+            content: Text(
+                'Are you sure you want to move ${task.title} to the recycle bin? You can restore it later if needed.'),
+            actions: [
+              TextButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  child: AppText(
+                    text: 'No',
+                    color: state2.switchValue ? Colors.white : Colors.black,
+                  )),
+              TextButton(
+                  onPressed: () {
+                    context.read<TasksBloc>().add(
+                          RemoveTaskEvent(task: task),
+                        );
                     Navigator.pop(context);
                   },
                   child: AppText(
@@ -84,11 +126,9 @@ class ListItem extends StatelessWidget {
                 children: [
                   IconButton(
                     onPressed: () {
-                      task.isDeleted == true
-                          ? deleteTask(context)
-                          : context
-                              .read<TasksBloc>()
-                              .add(RemoveTaskEvent(task: task));
+                      task.isDeleted == false
+                          ? removeTask(context)
+                          : deleteTask(context);
                     },
                     icon: const Icon(Icons.close),
                   ),
