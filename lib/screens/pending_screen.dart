@@ -64,6 +64,7 @@ class _PendingScreenState extends State<PendingScreen> {
                               Text(
                                 'Stay organized and productive',
                                 style: TextStyle(
+                                  fontWeight: FontWeight.bold,
                                   color: state2.switchValue
                                       ? Colors.white
                                       : Colors.black,

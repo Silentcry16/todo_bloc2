@@ -199,7 +199,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         borderRadius:
                             BorderRadius.circular(size.height * 0.08)),
                     child: IconButton(
-                      onPressed: () => _addTask(context),
+                      onPressed: () {
+                        currentIndex = BottomNavIndex.tasksIndex;
+                        _addTask(context);
+                      },
                       icon: Icon(
                         Icons.add,
                         color: Colors.white,

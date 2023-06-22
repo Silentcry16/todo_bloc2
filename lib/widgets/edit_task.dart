@@ -144,7 +144,6 @@ class _EditTaskState extends State<EditTask> {
                                   regDate: DateTime.now().toString(),
                                   isDeleted: false,
                                   isDone: false,
-                                  isFavorite: widget.oldtask.isFavorite,
                                   description: descriptionController.text);
                               context.read<TasksBloc>().add(EditTaskEvent(
                                   oldTask: widget.oldtask, newTask: task));

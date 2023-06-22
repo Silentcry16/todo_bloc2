@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:todo_bloc2/widgets/recycle_bin_task_list.dart';
 
 import '../blocs/bloc_exports.dart';
+import '../gen/assets.gen.dart';
 import '../widgets/app_text.dart';
 import '../widgets/custom_drawer.dart';
 import 'home_screen.dart';
@@ -90,9 +91,54 @@ class RecycleBinScreen extends StatelessWidget {
                         child: Chip(
                             label: Text(
                                 '${state.removedTasks.length} Tasks Removed'))),
-                    RecycleBinTaskList(
-                      taskList: state.removedTasks,
-                    ),
+                    state.removedTasks.isEmpty
+                        ? Expanded(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                const Spacer(),
+                                BlocBuilder<SwitchBloc, SwitchState>(
+                                  builder: (context, state) {
+                                    return SizedBox(
+                                      // color: Colors.amber,
+                                      width: size.width / 3,
+                                      child: state.switchValue == false
+                                          ? Image.asset(
+                                              Assets.images.bin.path,
+                                              fit: BoxFit.contain,
+                                            )
+                                          : Image.asset(
+                                              Assets.images.binDark.path,
+                                              fit: BoxFit.contain,
+                                            ),
+                                    );
+                                  },
+                                ),
+                                SizedBox(
+                                  height: size.height * 0.02,
+                                ),
+                                Text(
+                                  'The recycle bin is empty',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: state2.switchValue
+                                        ? Colors.white
+                                        : Colors.black,
+                                    fontSize: size.height * 0.026,
+                                    fontFamily: 'balker',
+                                    // fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                const Spacer(
+                                  flex: 2,
+                                ),
+                              ],
+                            ),
+                          )
+                        : RecycleBinTaskList(
+                            taskList: state.removedTasks,
+                          ),
                   ],
                 ),
               ),

@@ -26,9 +26,19 @@ class $AssetsImagesGen {
   AssetGenImage get autherLogo =>
       const AssetGenImage('assets/images/auther_logo.png');
 
-  /// File path: assets/images/emptyNote.png
-  AssetGenImage get emptyNote =>
-      const AssetGenImage('assets/images/emptyNote.png');
+  /// File path: assets/images/bin.png
+  AssetGenImage get bin => const AssetGenImage('assets/images/bin.png');
+
+  /// File path: assets/images/bin_dark.png
+  AssetGenImage get binDark =>
+      const AssetGenImage('assets/images/bin_dark.png');
+
+  /// File path: assets/images/empty.png
+  AssetGenImage get empty => const AssetGenImage('assets/images/empty.png');
+
+  /// File path: assets/images/empty_dark.png
+  AssetGenImage get emptyDark =>
+      const AssetGenImage('assets/images/empty_dark.png');
 
   /// File path: assets/images/notepad.png
   AssetGenImage get notepad => const AssetGenImage('assets/images/notepad.png');
@@ -46,7 +56,10 @@ class $AssetsImagesGen {
         add,
         addItem,
         autherLogo,
-        emptyNote,
+        bin,
+        binDark,
+        empty,
+        emptyDark,
         notepad,
         notepadDarkmode,
         splash
