@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../blocs/bloc_exports.dart';
 import '../models/task.dart';
@@ -17,6 +18,7 @@ class ListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    DateTime time = DateTime.parse(task.regDate);
     return BlocBuilder<SwitchBloc, SwitchState>(
       builder: (context, state) {
         return Container(
@@ -118,7 +120,43 @@ class ListItem extends StatelessWidget {
               ),
               const Spacer(),
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  showDialog(
+                      context: context,
+                      builder: (context) => SimpleDialog(
+                            elevation: 10,
+                            contentPadding: EdgeInsets.all(20),
+                            backgroundColor: state.switchValue
+                                ? Colors.grey.shade700
+                                : task.color,
+                            title: Text(
+                              task.title,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  height: size.height * 0.002),
+                            ),
+                            children: [
+                              Text(
+                                DateFormat.yMMMd().format(time),
+                                style: TextStyle(
+                                    color: state.switchValue
+                                        ? Colors.white38
+                                        : Colors.black45),
+                              ),
+                              SelectableText(
+                                task.description,
+                                style: TextStyle(
+                                    fontSize: size.height * 0.019,
+                                    wordSpacing: size.height * 0.003,
+                                    color: state.switchValue
+                                        ? Colors.white
+                                        : Colors.black87,
+                                    height: size.height * 0.002,
+                                    fontWeight: FontWeight.w500),
+                              ),
+                            ],
+                          ));
+                },
                 child: Container(
                   decoration: BoxDecoration(
                       color: Colors.black12,

@@ -136,19 +136,38 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                     Expanded(
                       child: ElevatedButton(
                         onPressed: () {
-                          var task = Task(
-                            id: GUIDGen.generate(),
-                            title: titleController.text,
-                            color: color ?? const Color(0xFFedf67d),
-                            regDate: DateTime.now().toString(),
-                            description: descriptionController.text,
-                          );
-                          context
-                              .read<TasksBloc>()
-                              .add(AddTaskEvent(task: task));
-                          Navigator.of(context).pop();
-                          titleController.clear();
-                          descriptionController.clear();
+                          if (!titleController.text.isEmpty) {
+                            var task = Task(
+                              id: GUIDGen.generate(),
+                              title: titleController.text,
+                              color: color ?? const Color(0xFFedf67d),
+                              regDate: DateTime.now().toString(),
+                              description: descriptionController.text,
+                            );
+                            context
+                                .read<TasksBloc>()
+                                .add(AddTaskEvent(task: task));
+                            Navigator.of(context).pop();
+                            titleController.clear();
+                            descriptionController.clear();
+                          } else {
+                            showDialog(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                title: const Text('Warning'),
+                                content: const Text(
+                                    'Please provide a title before proceeding.'),
+                                actions: [
+                                  TextButton(
+                                      onPressed: () => Navigator.pop(context),
+                                      child: const Text(
+                                        'Ok',
+                                        style: TextStyle(color: Colors.black),
+                                      ))
+                                ],
+                              ),
+                            );
+                          }
                         },
                         child: AppText(
                           text: 'Add',
