@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:todo_bloc2/widgets/app_text.dart';
 
 import '../blocs/bloc_exports.dart';
+import '../services/notification_api.dart';
 import '../widgets/add_task_screen.dart';
 import '../widgets/custom_drawer.dart';
 import 'completed_tasks_screen.dart';
@@ -23,6 +24,15 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    super.initState();
+    NotificationApi.initialiseNotifications();
+    NotificationApi.requestNotificationPermission();
+    NotificationApi.scheduledNotification('Reminder: Stay on Track!',
+        'Don\'t forget to prioritize your tasks today.');
+  }
+
   final GlobalKey<NavigatorState> _taskScreenKey = GlobalKey();
   final GlobalKey<NavigatorState> _completedScreenKey = GlobalKey();
   // final GlobalKey<NavigatorState> _favoriteScreenKey = GlobalKey();

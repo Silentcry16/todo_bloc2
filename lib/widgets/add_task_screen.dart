@@ -161,9 +161,12 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                                 actions: [
                                   TextButton(
                                       onPressed: () => Navigator.pop(context),
-                                      child: const Text(
+                                      child: Text(
                                         'Ok',
-                                        style: TextStyle(color: Colors.black),
+                                        style: TextStyle(
+                                            color: state.switchValue
+                                                ? Colors.white
+                                                : Colors.black),
                                       ))
                                 ],
                               ),

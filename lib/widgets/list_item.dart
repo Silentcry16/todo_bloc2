@@ -31,7 +31,7 @@ class ListItem extends StatelessWidget {
               ),
             ),
             content: Text(
-                'Are you sure you want to delete ${task.title} from recycle bin? This action cannot be undone.'),
+                'Are you sure you want to delete "${task.title}" from recycle bin? This action cannot be undone.'),
             actions: [
               TextButton(
                   onPressed: () => Navigator.of(context).pop(),
@@ -71,7 +71,7 @@ class ListItem extends StatelessWidget {
               ),
             ),
             content: Text(
-                'Are you sure you want to move ${task.title} to the recycle bin? You can restore it later if needed.'),
+                'Are you sure you want to move "${task.title}" to the recycle bin? You can restore it later if needed.'),
             actions: [
               TextButton(
                   onPressed: () => Navigator.of(context).pop(),
@@ -162,9 +162,27 @@ class ListItem extends StatelessWidget {
                   ),
                   task.isDeleted == false
                       ? IconButton(
-                          onPressed: () => context
-                              .read<TasksBloc>()
-                              .add(UpdateTaskEvent(task: task)),
+                          onPressed: () {
+                            context
+                                .read<TasksBloc>()
+                                .add(UpdateTaskEvent(task: task));
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: task.isDone == false
+                                    ? Text(
+                                        '${task.title} completed',
+                                        style: TextStyle(
+                                            fontSize: size.height * 0.02),
+                                      )
+                                    : Text(
+                                        '${task.title} moved back to the pending list.',
+                                        style: TextStyle(
+                                            fontSize: size.height * 0.02),
+                                      ),
+                                duration: const Duration(milliseconds: 1000),
+                              ),
+                            );
+                          },
                           icon: task.isDone == true
                               ? const Icon(Icons.check_box_outlined)
                               : const Icon(Icons.check_box_outline_blank),
